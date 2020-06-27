@@ -18,13 +18,13 @@ class Useful(commands.Cog):
             givenHourStr, givenMinuteStr = timeStr.split(":")
             givenMinuteStr = givenMinuteStr.lstrip("0") #removes leading zeros
 
-            tz = pytz.timezone('GMT') #sets timezone to be used to get current hour and minute
+            tz = pytz.timezone('GMT+1') #sets timezone to be used to get current hour and minute
             currentHour = datetime.now(tz).hour
             currentMinute = datetime.now(tz).minute
 
             hour, minute = int(givenHourStr) - currentHour, int(givenMinuteStr) - currentMinute
-            print(hour, minute, currentHour)
             time = hour*60**2 + minute*60
+
             print(time)
 
             await ctx.send(f"Reminder set for {timeStr} with message '{message}'")
