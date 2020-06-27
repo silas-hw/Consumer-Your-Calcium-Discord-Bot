@@ -4,6 +4,12 @@ import os
 import discord
 from discord.ext import commands
 
+#check to allow some commands to only be accessed by owner
+def check_owner():
+    def predicate(ctx):
+        return ctx.message.author.id == 385126151342915588
+    return commands.check(predicate)
+
 #custom prefixes
 def get_prefix(client, message):
     with open("prefixes.json", "r") as f:
@@ -65,6 +71,7 @@ async def changeprefix(ctx, prefix):
 
 #used to reload cogs
 @client.command()
+@check_owner()
 async def reload(ctx, extension):
     client.unload_extension(f"cogs.{extension}")
     client.load_extension(f"cogs.{extension}")
@@ -73,6 +80,7 @@ async def reload(ctx, extension):
 
 #used to load cogs
 @client.command()
+@check_owner()
 async def load(ctx, extension):
     client.load_extension(f"cogs.{extension}")
 
