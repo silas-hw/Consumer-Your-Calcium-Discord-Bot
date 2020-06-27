@@ -9,20 +9,23 @@ Reminders mention users or roles after a certain amount of time
 To use the command in discord type:  
 `//reminder @user/role time "message to be displayed"`  
     
-after the given time in minutes the bot would send:  
+after the given time has passed the bot would send:  
 `@user/role message to be displayed (reminder set by @user)`  
   
+the time can either be in minutes (e.g 5) or as a 24 hour timestamp (e.g 14:23)  
+  
 ### Set custom prefixes  
-With the custom prefix command changing the bots command prefix is much easier  
+With the custom prefix command changing the bots command prefix is much easier and allows for custom prefixes per server    
   
 simply type:
 `//prefix customPrefix`  
   
 ## Built with  
   
-* [discord.py](https://discordpy.readthedocs.io/en/latest/)
-* [asyncio](https://docs.python.org/3/library/asyncio.html)
-* [python](https://www.python.org/)
+* [discord.py](https://discordpy.readthedocs.io/en/latest/) for the main discord bot framework  
+* [asyncio](https://docs.python.org/3/library/asyncio.html) for asynchronous functions  
+* [python](https://www.python.org/) as the main programming language    
+* [pytz](https://pypi.org/project/pytz/) for timezones  
 
 ## Hosted by  
 * [heroku](www.heroku.com)
