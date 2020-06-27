@@ -4,6 +4,12 @@ import os
 import discord
 from discord.ext import commands
 
+@client.event
+async def on_ready():
+    print('bot online\n')
+
+
+#custom prefixes
 def get_prefix(client, message):
     with open("prefixes.json", "r") as f:
         prefixes = json.load(f)
@@ -11,10 +17,6 @@ def get_prefix(client, message):
     return prefixes[str(message.guild.id)]
 
 client = commands.Bot(command_prefix = get_prefix)
-
-@client.event
-async def on_ready():
-    print('bot online\n')
 
 @client.event
 async def on_guild_join(guild):
@@ -59,6 +61,8 @@ async def changeprefix(ctx, prefix):
     await ctx.send(f"Prefix changed to '{prefix}'!")
 
 
+
+#cog loading and reloading
 
 #used to reload cogs
 @client.command()
