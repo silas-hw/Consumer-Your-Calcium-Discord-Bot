@@ -25,8 +25,6 @@ class Useful(commands.Cog):
             hour, minute = int(givenHourStr) - currentHour, int(givenMinuteStr) - currentMinute
             time = hour*60**2 + minute*60
 
-            print(time)
-
             await ctx.send(f"Reminder set for {timeStr} with message '{message}'")
         else:
             time = int(timeStr)*60
