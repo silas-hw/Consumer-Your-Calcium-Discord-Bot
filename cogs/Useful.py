@@ -18,7 +18,7 @@ class Useful(commands.Cog):
             givenHourStr, givenMinuteStr = timeStr.split(":")
             givenMinuteStr = givenMinuteStr.lstrip("0") #removes leading zeros
 
-            tz = pytz.timezone('GMT+1') #sets timezone to be used to get current hour and minute
+            tz = pytz.timezone('Europe/London') #sets timezone to be used to get current hour and minute
             currentHour = datetime.now(tz).hour
             currentMinute = datetime.now(tz).minute
 
