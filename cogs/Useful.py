@@ -16,7 +16,7 @@ class Useful(commands.Cog):
         
         if re.search(r"\d\d:\d\d", timeStr):
             givenHourStr, givenMinuteStr = timeStr.split(":")
-            giveMinuteStr = giveMinuteStr.lstrip("0") #removes leading zeros
+            givenMinuteStr = givenMinuteStr.lstrip("0") #removes leading zeros
 
             tz = pytz.timezone('GMT') #sets timezone to be used to get current hour and minute
             currentHour = datetime.now(tz).hour
