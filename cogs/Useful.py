@@ -23,6 +23,7 @@ class Useful(commands.Cog):
             currentMinute = datetime.now(tz).minute
 
             hour, minute = int(givenHourStr) - currentHour, int(givenMinuteStr) - currentMinute
+            print(hour, minute)
             time = hour*60**2 + minute*60
             print(time)
 
