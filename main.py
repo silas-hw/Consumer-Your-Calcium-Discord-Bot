@@ -1,13 +1,57 @@
 #modules
+import json
 import os
 import discord
 from discord.ext import commands
 
-client = commands.Bot(command_prefix="%")
+def get_prefix(client, message):
+    with open("prefixes.json", "r") as f:
+        prefixes = json.load(f)
+
+    return prefixes[str(message.guild.id)]
+
+client = commands.Bot(command_prefix = get_prefix)
 
 @client.event
 async def on_ready():
     print('bot online\n')
+
+@client.event
+async def on_guild_join(guild):
+
+    #creates default prefix for servers
+    with open("prefixes.json", "r") as f:
+        prefixes = json.load(f)
+
+    prefixes[str(guild.id)] = "//"
+
+    with open("prefixes.json", "w") as f:
+        json.dump(prefixes, f, indent=4)
+
+@client.event
+async def on_guild_remove(guild):
+
+    #removes server from prefixes json file when they remove the bot
+    with open("prefixes.json", "r") as f:
+        prefixes = json.load(f)
+
+    prefixes.pop(str(guild.id))
+
+    with open("prefixes.json", "w") as f:
+        json.dump(prefixes, f, indent=4)
+
+#command for server to set custom id
+@client.command(aliases=["prefix", "cp"])
+async def changeprefix(ctx, prefix):
+    with open("prefixes.json", "r") as f:
+        prefixes = json.load(f)
+
+    prefixes[str(ctx.guild.id)] = prefix
+
+    with open("prefixes.json", "w") as f:
+        json.dump(prefixes, f, indent=4)
+
+
 
 #used to reload cogs
 @client.command()
