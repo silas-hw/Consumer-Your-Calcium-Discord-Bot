@@ -19,6 +19,8 @@ async def on_ready():
 @client.event
 async def on_guild_join(guild):
 
+    print(f"\nbot added to {guild}")
+
     #creates default prefix for servers
     with open("prefixes.json", "r") as f:
         prefixes = json.load(f)
@@ -30,6 +32,8 @@ async def on_guild_join(guild):
 
 @client.event
 async def on_guild_remove(guild):
+
+    print(f"\nbot removed from {guild}")
 
     #removes server from prefixes json file when they remove the bot
     with open("prefixes.json", "r") as f:
@@ -50,6 +54,9 @@ async def changeprefix(ctx, prefix):
 
     with open("prefixes.json", "w") as f:
         json.dump(prefixes, f, indent=4)
+
+    print(f"\n{ctx.message.author} changed prefix in {ctx.guild} to {prefix}")
+    await ctx.send(f"Prefix changed to '{prefix}'!")
 
 
 
