@@ -17,7 +17,7 @@ class Useful(commands.Cog):
         #if a member is mentioned but the member is afk, a message is sent
         textChannel = message.channel
         afkChannel = self.client.get_channel(690550327975346176)
-        if message.mentions in afkChannel.voice_members:
+        if message.mentions in afkChannel.members:
             await textChannel.send("user is afk")
 
         #allows commands to work with on_message event
