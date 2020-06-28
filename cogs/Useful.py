@@ -11,6 +11,14 @@ class Useful(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        
+        textChannel = message.channel
+        afkChannel = discord.utils.get(message.server.channels, id = '690550327975346176')
+        if message.content.mentions in afkChannel.voice_members:
+            await textChannel.send("user is afk")
+
     @commands.command(brief="Reminds friends to play games", description="mentions role/user after given amount of minutes has passed\nTo send a multiword message wrap the message with quotes")
     async def reminder(self, ctx, users, timeStr, message="reminder"):
         
@@ -32,6 +40,8 @@ class Useful(commands.Cog):
         
         await asyncio.sleep(time)
         await ctx.send(f"{users} {message} *(reminder set by {ctx.message.author})*")
+
+    
 
 def setup(client):
     client.add_cog(Useful(client))
