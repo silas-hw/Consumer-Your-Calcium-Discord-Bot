@@ -17,7 +17,7 @@ class Useful(commands.Cog):
         #if a member is mentioned but the member is afk, a message is sent
         textChannel = message.channel
         afkChannel = discord.utils.get(message.guild.channels, id = '690550327975346176')
-        if message.content.mentions in afkChannel.voice_members:
+        if message.mentions in afkChannel.voice_members:
             await textChannel.send("user is afk")
 
         #allows commands to work with on_message event
