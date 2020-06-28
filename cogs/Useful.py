@@ -19,7 +19,7 @@ class Useful(commands.Cog):
         afkChannel = self.client.get_channel(690550327975346176)
         print(message.mentions)
         print(afkChannel.members)
-        if message.mentions in afkChannel.members:
+        if message.mentions[0] in afkChannel.members:
             await textChannel.send("user is afk")
 
         #allows commands to work with on_message event
