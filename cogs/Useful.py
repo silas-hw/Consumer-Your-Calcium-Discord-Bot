@@ -15,6 +15,7 @@ class Useful(commands.Cog):
     @commands.command(brief="sets yourself as afk", description="sets you as afk so if someone mentions you they are informed with a message\nto send a multiword message wrap it in quotation marks *(e.g 'message to send')*")
     async def afk(self, ctx, message):
         #if user is already afk, remove them from the afk dict, if not add them to it
+        print("test")
         if ctx.message.author not in self.afkUsers:
             print("now afk")
             self.afkUsers[ctx.message.author] = message
