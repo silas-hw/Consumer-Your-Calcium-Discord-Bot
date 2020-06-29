@@ -14,7 +14,7 @@ class Admin(commands.Cog):
     @commands.command(aliases=["announce"])
     @check_owner()
     async def announcement(self, ctx, message):
-        await ctx.send(f"<@684091513491423323> {message}")
+        await ctx.send(ctx.message.server.default_role, message)
 
 def setup(client):
     client.add_cog(Admin(client))
