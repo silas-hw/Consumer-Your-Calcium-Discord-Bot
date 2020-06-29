@@ -16,10 +16,10 @@ class Useful(commands.Cog):
     async def afk(self, ctx, userMessage):
         #if user is already afk, remove them from the afk dict, if not add them to it
         print("test")
-        if ctx.message.author not in self.afkUsers:
-            self.afkUsers[ctx.message.author] = userMessage
-        else:
+        if ctx.message.author in self.afkUsers:
             self.afkUsers.pop(ctx.message.author)
+        elif ctx.message.author not in self.afkUsers:
+            self.afkUsers[ctx.message.author] = userMessage
 
     @commands.Cog.listener()
     async def on_message(self, message):
