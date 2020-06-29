@@ -16,5 +16,5 @@ class Admin(commands.Cog):
     async def announcement(self, ctx, message):
         await ctx.send(f"<@684091513491423323> {message}")
 
-def setuo(client):
+def setup(client):
     client.add_cog(Admin(client))
