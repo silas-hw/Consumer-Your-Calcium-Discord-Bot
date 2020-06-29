@@ -16,8 +16,10 @@ class Useful(commands.Cog):
     async def afk(self, ctx, message):
         #if user is already afk, remove them from the afk dict, if not add them to it
         if ctx.message.author in self.afkUsers:
+            print("now not afk")
             self.afkUsers.pop(ctx.message.author)
         else:
+            print("now afk")
             self.afkUsers[ctx.message.author] = message
 
     @commands.Cog.listener()
