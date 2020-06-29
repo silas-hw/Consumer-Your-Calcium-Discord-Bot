@@ -19,12 +19,10 @@ class Useful(commands.Cog):
         if ctx.message.author not in self.afkUsers:
             print("now afk")
             self.afkUsers[ctx.message.author] = message
-            return
-            
         else:
             print("now not afk")
             self.afkUsers.pop(ctx.message.author)
-            return
+        return None
 
     @commands.Cog.listener()
     async def on_message(self, message):
