@@ -18,7 +18,7 @@ class Useful(commands.Cog):
         print("test")
         if ctx.message.author in self.afkUsers:
             self.afkUsers.pop(ctx.message.author)
-        elif ctx.message.author not in self.afkUsers:
+        else:
             self.afkUsers[ctx.message.author] = userMessage
 
     @commands.Cog.listener()
