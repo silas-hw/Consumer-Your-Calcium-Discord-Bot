@@ -23,11 +23,12 @@ class Useful(commands.Cog):
         #allows commands to work with on_message event
         await self.client.process_commands(message)
 
+    #mentions a role or member after a given amount of time has passed
     @commands.command(brief="Reminds friends to play games", description="mentions role/user after given amount of minutes has passed\nTo send a multiword message wrap the message with quotes")
     async def reminder(self, ctx, users, timeStr, message="reminder"):
         
-        if re.search(r"\d\d:\d\d", timeStr):
-            givenHourStr, givenMinuteStr = timeStr.split(":")
+        if re.search(r"\d\d:\d\d", timeStr): #checks formatting of time given
+            givenHourStr, givenMinuteStr = timeStr.split(":") #the numbers seperated by the : are assigned to two variables
             givenMinuteStr = givenMinuteStr.lstrip("0") #removes leading zeros
 
             tz = pytz.timezone('Europe/London') #sets timezone to be used to get current hour and minute
