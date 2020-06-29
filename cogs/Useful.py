@@ -10,6 +10,11 @@ class Useful(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+        self.afkUsers = {}
+
+    @commands.command(brief="sets yourself as afk", description="sets you as afk so if someone mentions you they are informed with a message\nto send a multiword message wrap it in quotation marks *(e.g 'message to send')*")
+    async def afk(self, ctx, message):
+        self.afkUsers[ctx.message.author] = message
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -17,12 +22,19 @@ class Useful(commands.Cog):
         #if a member is mentioned but the member is afk, a message is sent
         textChannel = message.channel
         afkChannel = self.client.get_channel(690550327975346176)
-        if message.mentions[0] in afkChannel.members:
-            await textChannel.send("user is afk")
+        
+        try:
+            if message.mentions[0] in self.afkUsers:
+                await textChannel.send(f"user is afk- {self.afkUsers[message.mentions[0]]}")
+            elif message.mentions[0] in afkChannel.members:
+                await textChannel.send("user is afk")
+            
+        except:
+            pass
 
         #allows commands to work with on_message event
         await self.client.process_commands(message)
-
+    
     #mentions a role or member after a given amount of time has passed
     @commands.command(brief="Reminds friends to play games", description="mentions role/user after given amount of minutes has passed\nTo send a multiword message wrap the message with quotes")
     async def reminder(self, ctx, users, timeStr, message="reminder"):
