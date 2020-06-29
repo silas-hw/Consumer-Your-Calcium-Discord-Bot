@@ -14,12 +14,23 @@ after the given time has passed the bot would send:
   
 the time can either be in minutes (e.g 5) or as a 24 hour timestamp (e.g 14:23)  
   
+### inform you if a user is afk  
+If a user is afk or has set themself as afk the bot will inform you if you mention them  
+
 ### Set custom prefixes  
 With the custom prefix command changing the bots command prefix is much easier and allows for custom prefixes per server    
   
 simply type:
 `//prefix customPrefix`  
   
+## Send bot update announcements  
+**This command can only be accessed by the bot owner**  
+  
+The bot has the ability to send announcements for updates to the bot  
+Announcements always mention everyone  
+  
+`//announce "announcement text"`  
+
 ## Built with  
   
 * [discord.py](https://discordpy.readthedocs.io/en/latest/) for the main discord bot framework  
