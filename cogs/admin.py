@@ -15,7 +15,7 @@ class Admin(commands.Cog):
     @check_owner()
     async def announcement(self, ctx, message):
 
-        ctx.message.delete() #deletes message used to invoke command
+        await ctx.message.delete() #deletes message used to invoke command
         await ctx.send(f"{ctx.message.guild.default_role} {message}")
 
 def setup(client):
