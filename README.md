@@ -23,7 +23,7 @@ With the custom prefix command changing the bots command prefix is much easier a
 simply type:
 `//prefix customPrefix`  
   
-## Send bot update announcements  
+### Send bot update announcements  
 **This command can only be accessed by the bot owner**  
   
 The bot has the ability to send announcements for updates to the bot  
