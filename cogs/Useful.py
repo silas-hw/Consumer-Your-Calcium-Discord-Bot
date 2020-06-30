@@ -63,7 +63,7 @@ class useful(commands.Cog):
 
     #gives information of given user
     @commands.command(brief="get details of any member")
-    async def information(self, ctx, member):
+    async def information(self, ctx, member: discord.Member):
 
         message = ""
         message += f"Nickname: {member.display_name}\n"
