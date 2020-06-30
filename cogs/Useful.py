@@ -13,7 +13,7 @@ class useful(commands.Cog):
         self.afkUsers = {}
 
     @commands.command()
-    async def afk(self, ctx, *, userMessage=None):
+    async def afk(self, ctx, *, userMessage=" "):
 
         #if user is already afk, remove them from the afk dict, if not add them to it
         print("test")
