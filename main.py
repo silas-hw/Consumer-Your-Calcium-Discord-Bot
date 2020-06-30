@@ -21,7 +21,7 @@ client = commands.Bot(command_prefix = get_prefix)
 
 @client.event
 async def on_ready():
-    print('bot online\n')
+    print('\nbot online\n')
 
 @client.event
 async def on_guild_join(guild):
@@ -84,11 +84,12 @@ async def reload(ctx, extension):
 async def load(ctx, extension):
     client.load_extension(f"cogs.{extension}")
 
-    print(f"{extension} reloaded by {ctx.message.author}")
+    print(f"{extension} loaded by {ctx.message.author}")
 
-
+print('loading cogs: ')
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
+        print(filename)
         client.load_extension(f"cogs.{filename[:-3]}")
 
-client.run('NzI2MTkzODQ1ODYzMzE3NTg2.Xvp2rw.x4Z6lcetockiQ2KsHjE10x5ENkM')
+client.run('NzI2MTkzODQ1ODYzMzE3NTg2.XvsfBw.K-6ixdyiHX8LAx-lp9mpPusrkSo')
