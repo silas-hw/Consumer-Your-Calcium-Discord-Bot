@@ -70,7 +70,10 @@ class useful(commands.Cog):
         message += f"Joined server at: {member.joined_at}\n"
         message += f"Top role: {member.top_role}\n"
         message += f"Status: {member.status}\n"
-        message += f"Current activity: {member.activities[0]}\n"
+        try:
+            message += f"Current activity: {member.activities[0]}\n"
+        except:
+            pass
 
         embed = discord.Embed(
             title = str(member.name),
