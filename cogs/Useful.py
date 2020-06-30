@@ -22,7 +22,7 @@ class useful(commands.Cog):
             await ctx.send("you are no longer afk")
         else:
             self.afkUsers[ctx.message.author] = userMessage
-            await ctx.send(f"you are no afk with message - {userMessage}")
+            await ctx.send(f"you are now afk with message - {userMessage}")
 
     @commands.Cog.listener()
     async def on_message(self, message):
