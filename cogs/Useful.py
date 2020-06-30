@@ -19,8 +19,10 @@ class useful(commands.Cog):
         print("test")
         if ctx.message.author in self.afkUsers:
             self.afkUsers.pop(ctx.message.author)
+            await ctx.send("you are no longer afk")
         else:
             self.afkUsers[ctx.message.author] = userMessage
+            await ctx.send(f"you are no afk with message - {usrMessage}")
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -31,12 +33,9 @@ class useful(commands.Cog):
         
         for member in message.mentions:
             if member in self.afkUsers:
-                await textChannel.send(f"{member} is afk- {self.afkUsers[member]}")
+                await textChannel.send(f"{member} is afk - {self.afkUsers[member]}")
             elif member in afkChannel.members:
                 await textChannel.send(f"{member} is afk")
-            
-        #allows commands to work with on_message event
-        #await self.client.process_commands(message)
     
     #mentions a role or member after a given amount of time has passed
     @commands.command(brief="Reminds friends to play games", description="mentions role/user after given amount of minutes has passed")
