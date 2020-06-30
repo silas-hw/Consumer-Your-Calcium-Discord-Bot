@@ -61,10 +61,10 @@ class useful(commands.Cog):
         await asyncio.sleep(time)
         await ctx.send(f"{users} {message} *(reminder set by {ctx.message.author})*")
 
-    #gives inorfmation of given user
+    #gives information of given user
     @commands.command(brief="get details of any member")
-    async def inorfmation(self, ctx, member):
-        
+    async def information(self, ctx, member):
+
         message = ""
         message += f"Nickname: {member.display_name}\n"
         message += f"Joined server at: {member.joined_at}\n"
