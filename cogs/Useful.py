@@ -61,7 +61,23 @@ class useful(commands.Cog):
         await asyncio.sleep(time)
         await ctx.send(f"{users} {message} *(reminder set by {ctx.message.author})*")
 
-    
+    #gives inorfmation of given user
+    @commands.command(brief="get details of any member")
+    async def inorfmation(self, ctx, member):
+        
+        message = ""
+        message += f"Nickname: {member.display_name}\n"
+        message += f"Joined server at: {member.joined_at}\n"
+        message += f"Top role: {member.top_role}\n"
+        message += f"Status: {member.status}\n"
+        message += f"Current activity: {member.activities}\n"
+
+        embed = discord.Embed(
+            title = str(member.name),
+            description = message
+        )
+        embed.set_image(url=member.avatar_url)
+        await ctx.send(embed=embed)
 
 def setup(client):
     client.add_cog(useful(client))
