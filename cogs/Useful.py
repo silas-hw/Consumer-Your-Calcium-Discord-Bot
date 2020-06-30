@@ -1,8 +1,8 @@
 #modules used
 import re
 import pytz
-from datetime import datetime
 import asyncio
+from datetime import datetime
 import discord
 from discord.ext import commands
 
@@ -36,7 +36,7 @@ class useful(commands.Cog):
                 await textChannel.send(f"{member} is afk")
             
         #allows commands to work with on_message event
-        await self.client.process_commands(message)
+        #await self.client.process_commands(message)
     
     #mentions a role or member after a given amount of time has passed
     @commands.command(brief="Reminds friends to play games", description="mentions role/user after given amount of minutes has passed")
