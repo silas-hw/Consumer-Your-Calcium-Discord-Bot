@@ -62,7 +62,7 @@ class useful(commands.Cog):
         await ctx.send(f"{users} {message} *(reminder set by {ctx.message.author})*")
 
     #gives information of given user
-    @commands.command(brief="get details of any member")
+    @commands.command(aliases=["info", "i"], brief="get details of any member")
     async def information(self, ctx, member: discord.Member):
 
         message = ""
