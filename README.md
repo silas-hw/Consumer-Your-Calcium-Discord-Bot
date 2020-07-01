@@ -14,6 +14,16 @@ after the given time has passed the bot would send:
   
 the time can either be in minutes (e.g 5) or as a 24 hour timestamp (e.g 14:23)  
   
+### find information about any member  
+It is possible to find information about any member with `//info @member`  
+  
+Details include:  
+* Nickname  
+* Date and time they joined the server  
+* Top role  
+* Current status *(online, offline, etc...)*  
+* current activity *(playing, listening, etc...)*  
+  
 ### inform you if a user is afk  
 If a user is afk or has set themself as afk the bot will inform you if you mention them  
 
