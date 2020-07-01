@@ -8,7 +8,7 @@ def check_owner():
 
 def check_admin():
     def predicate(ctx):
-        return 699302808784207992 in ctx.message.author.roles
+        return ctx.guild.get_role(699302808784207992) in ctx.message.author.roles
     return commands.check(predicate)
 
 class Admin(commands.Cog):
@@ -41,8 +41,6 @@ class Admin(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-
-        print(message.author.roles)
 
         if message.author in self.mutedMembers:
             message.delete() #deletes message if user is muted
