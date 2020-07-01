@@ -32,12 +32,12 @@ class Admin(commands.Cog):
             self.mutedMembers.remove(member)
 
             print(f"\n{ctx.message.author} unmuted {member}")
-            await ctx.send(f"{member} is no longer muted")
+            await ctx.send(f"<speaker:727914839615471687> {member} is no longer muted")
         else:
             self.mutedMembers.append(member)
 
             print(f"\n{ctx.message.author} muted {member}")
-            await ctx.send(f"{member} is now muted")
+            await ctx.send(f"<mute:727914643879886929> {member} is now muted")
 
     @commands.Cog.listener()
     async def on_message(self, message):

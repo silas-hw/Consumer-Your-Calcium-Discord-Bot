@@ -52,13 +52,13 @@ class useful(commands.Cog):
             hour, minute = int(givenHourStr) - currentHour, int(givenMinuteStr) - currentMinute
             time = hour*60**2 + minute*60
 
-            await ctx.send(f"Reminder set for {timeStr} with message '{message}'")
+            await ctx.send(f"<bell:727914124230787104> Reminder set for {timeStr} with message '{message}'")
         else:
             time = int(timeStr)*60
-            await ctx.send(f"Reminder set for {time/60} minutes with message '{message}'")
+            await ctx.send(f"<bell:727914124230787104> Reminder set for {time/60} minutes with message '{message}'")
         
         await asyncio.sleep(time)
-        await ctx.send(f"{users} {message} *(reminder set by {ctx.message.author})*")
+        await ctx.send(f"<bell:727914124230787104> {users} {message} *(reminder set by {ctx.message.author})*")
 
     #gives information of given user
     @commands.command(aliases=["info", "i"], brief="get details of any member")
