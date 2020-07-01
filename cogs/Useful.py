@@ -22,7 +22,7 @@ class useful(commands.Cog):
             await ctx.send("you are no longer afk")
         else:
             self.afkUsers[ctx.message.author] = userMessage
-            await ctx.send(f"you are now afk with message - {userMessage}")
+            await ctx.send(f"<:zzz:727916453466210434> you are now afk with message - {userMessage}")
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -33,9 +33,9 @@ class useful(commands.Cog):
         
         for member in message.mentions:
             if member in self.afkUsers:
-                await textChannel.send(f"{member} is afk - {self.afkUsers[member]}")
+                await textChannel.send(f"<:zzz:727916453466210434> {member} is afk - {self.afkUsers[member]}")
             elif member in afkChannel.members:
-                await textChannel.send(f"{member} is afk")
+                await textChannel.send(f"<:zzz:727916453466210434> {member} is afk")
     
     #mentions a role or member after a given amount of time has passed
     @commands.command(brief="Reminds friends to play games", description="mentions role/user after given amount of minutes has passed")
@@ -52,13 +52,13 @@ class useful(commands.Cog):
             hour, minute = int(givenHourStr) - currentHour, int(givenMinuteStr) - currentMinute
             time = hour*60**2 + minute*60
 
-            await ctx.send(f"<bell:727914124230787104> Reminder set for {timeStr} with message '{message}'")
+            await ctx.send(f"<:bell:727914124230787104> Reminder set for {timeStr} with message '{message}'")
         else:
             time = int(timeStr)*60
-            await ctx.send(f"<bell:727914124230787104> Reminder set for {time/60} minutes with message '{message}'")
+            await ctx.send(f"<:bell:727914124230787104> Reminder set for {time/60} minutes with message '{message}'")
         
         await asyncio.sleep(time)
-        await ctx.send(f"<bell:727914124230787104> {users} {message} *(reminder set by {ctx.message.author})*")
+        await ctx.send(f"<:bell:727914124230787104> {users} {message} *(reminder set by {ctx.message.author})*")
 
     #gives information of given user
     @commands.command(aliases=["info", "i"], brief="get details of any member")
