@@ -43,7 +43,7 @@ class Admin(commands.Cog):
     async def on_message(self, message):
 
         if message.author in self.mutedMembers:
-            message.delete() #deletes message if user is muted
+            await message.delete() #deletes message if user is muted
 
 def setup(client):
     client.add_cog(Admin(client))
