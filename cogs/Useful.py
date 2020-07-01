@@ -41,7 +41,6 @@ class useful(commands.Cog):
     @commands.command(brief="Reminds friends to play games", description="mentions role/user after given amount of minutes has passed")
     async def reminder(self, ctx, users, timeStr, *, message="reminder"):
         
-        print('yeet')
         if re.search(r"\d\d:\d\d", timeStr): #checks formatting of time given
             givenHourStr, givenMinuteStr = timeStr.split(":") #the numbers seperated by the : are assigned to two variables
             givenMinuteStr = givenMinuteStr.lstrip("0") #removes leading zeros

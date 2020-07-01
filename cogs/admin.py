@@ -8,7 +8,7 @@ def check_owner():
 
 def check_admin():
     def predicate(ctx):
-        return ctx.message.author.id == 699302808784207992
+        return 699302808784207992 in ctx.message.author.roles.id
     return commands.check(predicate)
 
 class Admin(commands.Cog):
@@ -30,9 +30,13 @@ class Admin(commands.Cog):
 
         if member in self.mutedMembers:
             self.mutedMembers.pop(member)
+
+            print(f"\n{ctx.message.author} unmuted {member}")
             await ctx.send(f"{member} is no longer muted")
         else:
             self.mutedMembers.append(member)
+
+            print(f"\n{ctx.message.author} muted {member}")
             await ctx.send(f"{member} is now muted")
 
     @commands.Cog.listener()
