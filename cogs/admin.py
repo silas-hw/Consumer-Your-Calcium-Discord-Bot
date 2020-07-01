@@ -29,7 +29,7 @@ class Admin(commands.Cog):
     async def mute(self, ctx, member: discord.Member):
 
         if member in self.mutedMembers:
-            self.mutedMembers.pop(member)
+            self.mutedMembers.remove(member)
 
             print(f"\n{ctx.message.author} unmuted {member}")
             await ctx.send(f"{member} is no longer muted")
