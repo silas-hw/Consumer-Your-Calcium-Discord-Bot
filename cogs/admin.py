@@ -13,7 +13,7 @@ def check_admin():
 
 class Admin(commands.Cog):
 
-    def __ini__(self, client):
+    def __init__(self, client):
         self.client = client
         self.mutedMembers = []
     
