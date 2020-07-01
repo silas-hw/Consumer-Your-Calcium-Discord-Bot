@@ -32,14 +32,15 @@ class useful(commands.Cog):
         afkChannel = self.client.get_channel(690550327975346176)
         
         for member in message.mentions:
-            if member in self.afkUsers:
-                await textChannel.send(f"<:zzz:727916453466210434> {member} is afk - {self.afkUsers[member]}")
-            elif member in afkChannel.members:
-                await textChannel.send(f"<:zzz:727916453466210434> {member} is afk")
+            if member != message.author:
+                if member in self.afkUsers:
+                    await textChannel.send(f"<:zzz:727916453466210434> {member} is afk - {self.afkUsers[member]}")
+                elif member in afkChannel.members:
+                    await textChannel.send(f"<:zzz:727916453466210434> {member} is afk")
     
     #mentions a role or member after a given amount of time has passed
     @commands.command(brief="Reminds friends to play games", description="mentions role/user after given amount of minutes has passed")
-    async def reminder(self, ctx, users, timeStr, *, message="reminder"):
+    async def reminder(self, ctx, users, timeStr = "5", *, message="reminder"):
         
         if re.search(r"\d\d:\d\d", timeStr): #checks formatting of time given
             givenHourStr, givenMinuteStr = timeStr.split(":") #the numbers seperated by the : are assigned to two variables
