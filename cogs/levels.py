@@ -18,26 +18,28 @@ class levels(commands.Cog):
     
     async def update_levels(self, member):
         #checks if members id exists in database
-        self.dbcursor.execute("SELECT memberid FROM members where memberid = %s", (member.id))
+        self.dbcursor.execute(f"SELECT memberid FROM members WHERE memberid = {member.id}")
         id = self.dbcursor.fetchone()
         if not id:
-            self.dbcursor.execute("INSERT INTO members (memberid, xp, level, messages) VALUES (%s, %s, %s)", (member.id, 0, 0, 0))
+            self.dbcursor.execute("INSERT INTO members (memberid, xp, level, messages) VALUES (%s, %s, %s, %s)", (member.id, 0, 0, 0))
             db.commit()
 
     async def add_xp(self, member, xp):
-        self.dbcursor.execute("SELECT xp FROM members WHERE memberid = %s", (member.id))
-        xp += self.dbcursor[0]
-        self.dbcursor.execute("UPDATE members SET xp = %s WHERE memberid = %s", (xp, member.id))
+        self.dbcursor.execute(f"SELECT xp FROM members WHERE memberid = {member.id}")
+        for value in self.dbcursor:
+            xp += value[0]
+        self.dbcursor.execute(f"UPDATE members SET xp = {xp} WHERE memberid = {member.id}")
         db.commit()
     
     async def level_up(self, member, channel):
-        self.dbcursor.execute("SELECT xp, level FROM members WHERE memberid = %s", (member.id))
-        currentXp = self.dbcursor[0]
-        currentLvl = self.dbcursor[1]
+        self.dbcursor.execute(f"SELECT xp, level FROM members WHERE memberid = {member.id}")
+        for value in self.dbcursor:
+            currentXp = value[0]
+            currentLvl = value[1]
         newLvl = int(currentXp ** (1/4)) #calculates new level
 
         if currentLvl < newLvl:
-            self.dbcursor("UPDATE members SET lvl = %s WHERE memberid = %s", (newLvl, member.id))
+            self.dbcursor.execute(f"UPDATE members SET level = {newLvl} WHERE memberid = {member.id}")
             db.commit()
             await channel.send(f"{member} has leveled up to level {newLvl}")
 
@@ -57,9 +59,10 @@ class levels(commands.Cog):
     @commands.command()
     async def level(self, ctx):
         
-        self.dbcursor.execute("SELECT xp, level FROM members WHERE memberid = %s", (ctx.message.author.id))
-        currentXp = self.dbcursor[0] #members current xp
-        currentLvl = self.dbcursor[1] #members current lvl
+        self.dbcursor.execute(f"SELECT xp, level FROM members WHERE memberid = {ctx.message.author.id}")
+        for value in self.dbcursor:
+            currentXp = value[0] #members current xp
+            currentLvl = value[1] #members current lvl
         baseXp = currentLvl**4 #base xp of members current level
         neededXp = (currentLvl+1)**4 #xp needed to level up
 
