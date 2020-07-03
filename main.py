@@ -90,4 +90,4 @@ for filename in os.listdir('./cogs'):
         print(filename)
         client.load_extension(f"cogs.{filename[:-3]}")
 
-client.run('NzI3NDg1ODI3NTI1MTE1OTI2.Xv8UZw.mVRXiakLoxm1zKDEHyQibruOtqQ') #when going from testing branches to the main branch remember to change to the main bot token
+client.run('NzI2MTkzODQ1ODYzMzE3NTg2.Xv8dGw.KnWTINC9BBplNyTJ_085Pw-f_1M') #when going from testing branches to the main branch remember to change to the main bot token
