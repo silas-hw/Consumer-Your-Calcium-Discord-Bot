@@ -7,7 +7,7 @@ providing useful tools for members and admins
 Reminders mention users or roles after a certain amount of time  
   
 To use the command in discord type:  
-`//reminder @user/role time "message to be displayed"`  
+`//reminder @user/role time <message to be displayed>`  
     
 after the given time has passed the bot would send:  
 `@user/role message to be displayed (reminder set by @user)`  
@@ -24,8 +24,10 @@ Details include:
 * Current status *(online, offline, etc...)*  
 * current activity *(playing, listening, etc...)*  
   
-### inform you if a user is afk  
+### Inform you if a user is afk  
 If a user is afk or has set themself as afk the bot will inform you if you mention them  
+  
+Go afk by moving to the afk voice channel or with `//afk <message>`  
 
 ### Set custom prefixes  
 With the custom prefix command changing the bots command prefix is much easier and allows for custom prefixes per server    
@@ -39,7 +41,12 @@ simply type:
 The bot has the ability to send announcements for updates to the bot  
 Announcements always mention everyone  
   
-`//announce "announcement text"`  
+`//announce <announcement text>`  
+  
+### Levelling system  
+Gain xp and level up by sending messages!  
+  
+Check your level and progress with `//level`  
 
 ## Built with  
   
@@ -47,9 +54,11 @@ Announcements always mention everyone
 * [asyncio](https://docs.python.org/3/library/asyncio.html) for asynchronous functions  
 * [python](https://www.python.org/) as the main programming language    
 * [pytz](https://pypi.org/project/pytz/) for timezones  
+* [MySql](https://www.mysql.com/) for sql database handling  
 
 ## Hosted by  
-* [heroku](www.heroku.com)
+* [heroku](www.heroku.com) *for bot hosting*  
+* [heliohost](https://www.heliohost.org/) *for MySql database hosting*    
 
 ## Authors
 * [CleanlyWolf/Silas Hayes-Williams](https://twitter.com/silas_hw) *(twitter)*  
