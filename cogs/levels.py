@@ -1,78 +1,65 @@
 #modules
+import mysql.connector
 import json
 import discord
 from discord.ext import commands
 
+db = mysql.connector.connect (
+    host="johnny.heliohost.org",
+    user="silashw",
+    passwd="elephantCode88",
+    database="silashw_levelsData"
+)
 class levels(commands.Cog):
 
-    def __init__(self, client):
+    def __init__(self, client):  
         self.client = client
+        self.dbcursor = db.cursor()
     
-    @staticmethod
-    async def update_levels(file, member):
-        if not str(member.id) in file:
-            file[str(member.id)] = {}
-            file[str(member.id)]['xp'] = 0
-            file[str(member.id)]['lvl'] = 0
+    async def update_levels(self, member):
+        #checks if members id exists in database
+        self.dbcursor.execute("SELECT memberid FROM members where memberid = %s", (member.id))
+        id = self.dbcursor.fetchone()
+        if not id:
+            self.dbcursor.execute("INSERT INTO members (memberid, xp, level, messages) VALUES (%s, %s, %s)", (member.id, 0, 0, 0))
+            db.commit()
 
-    @staticmethod
-    async def add_xp(file, member, xp):
-        file[str(member.id)]['xp'] += xp
+    async def add_xp(self, member, xp):
+        self.dbcursor.execute("SELECT xp FROM members WHERE memberid = %s", (member.id))
+        xp += self.dbcursor[0]
+        self.dbcursor.execute("UPDATE members SET xp = %s WHERE memberid = %s", (xp, member.id))
+        db.commit()
     
-    @staticmethod
-    async def level_up(file, member, channel):
-        currentXp = file[str(member.id)]['xp']
-        currentLvl = file[str(member.id)]['lvl']
+    async def level_up(self, member, channel):
+        self.dbcursor.execute("SELECT xp, level FROM members WHERE memberid = %s", (member.id))
+        currentXp = self.dbcursor[0]
+        currentLvl = self.dbcursor[1]
         newLvl = int(currentXp ** (1/4)) #calculates new level
 
         if currentLvl < newLvl:
-            file[str(member.id)]['lvl'] = newLvl
+            self.dbcursor("UPDATE members SET lvl = %s WHERE memberid = %s", (newLvl, member.id))
+            db.commit()
             await channel.send(f"{member} has leveled up to level {newLvl}")
-
-    @commands.command()
-    async def manualLevelUpdate(self, ctx):
-        with open("./cogs/levelsData.json", "r") as f:
-            levelsData = json.load(f)
-
-        for member in ctx.guild.members:
-            await self.update_levels(levelsData, member)
-
-        with open("./cogs/levelsData.json", "w") as f:
-            json.dump(levelsData, f)
-
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        with open("./cogs/levelsData.json", "r") as f:
-            levelsData = json.load(f)
 
-        await self.update_levels(levelsData, member)
-
-        with open("./cogs/levelsData.json", "w") as f:
-            json.dump(levelsData, f)
+        await self.update_levels(member)
 
     @commands.Cog.listener()
     async def on_message(self, message):
         if not message.author.bot: #if member sending message isn't a bot account
-            with open("./cogs/levelsData.json", "r") as f:
-                levelsData = json.load(f)
             
-            await self.update_levels(levelsData, message.author)
-            await self.add_xp(levelsData, message.author, 5)
-            await self.level_up(levelsData, message.author, message.channel)
+            await self.update_levels(message.author)
+            await self.add_xp(message.author, 5)
+            await self.level_up(message.author, message.channel)
 
-            with open("./cogs/levelsData.json", "w") as f:
-                json.dump(levelsData, f)
-
-    
     @commands.command()
     async def level(self, ctx):
-
-        with open("./cogs/levelsData.json", "r") as f:
-            levelsData = json.load(f)
         
-        currentXp = levelsData[str(ctx.author.id)]['xp'] #members current xp
-        currentLvl = levelsData[str(ctx.author.id)]['lvl'] #members current lvl
+        self.dbcursor.execute("SELECT xp, level FROM members WHERE memberid = %s", (ctx.message.author.id))
+        currentXp = self.dbcursor[0] #members current xp
+        currentLvl = self.dbcursor[1] #members current lvl
         baseXp = currentLvl**4 #base xp of members current level
         neededXp = (currentLvl+1)**4 #xp needed to level up
 
