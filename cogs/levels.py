@@ -86,6 +86,15 @@ class levels(commands.Cog):
 
         #send message
         await ctx.send(message)
+    
+    @commands.command()
+    async def addMemberNames(self, ctx):
+
+        self.dbcursor.execute("SELECT memberid FROM members")
+
+        for x in self.dbcursor:
+            memberName = ctx.message.guild.get_member(x[0])
+            print(str(memberName))
 
 def setup(client):
     client.add_cog(levels(client))

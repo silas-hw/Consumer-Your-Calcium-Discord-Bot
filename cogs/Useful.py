@@ -16,7 +16,6 @@ class useful(commands.Cog):
     async def afk(self, ctx, *, userMessage=" "):
 
         #if user is already afk, remove them from the afk dict, if not add them to it
-        print("test")
         if ctx.message.author in self.afkUsers:
             self.afkUsers.pop(ctx.message.author)
             await ctx.send("you are no longer afk")
