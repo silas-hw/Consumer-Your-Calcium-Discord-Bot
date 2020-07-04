@@ -93,8 +93,9 @@ class levels(commands.Cog):
         self.dbcursor.execute("SELECT memberid FROM members")
 
         for memberid in self.dbcursor:
+            print(memberid)
             memberName = str(ctx.message.guild.get_member(memberid[0]))
-            self.dbcursor.execute(f"UPDATE members SET username = {memberName} WHERE member id = {memberid}")
+            self.dbcursor.execute(f"UPDATE members SET username = '{memberName}' WHERE member id = {memberid}")
             db.commit()
 
             print(memberName) #for testing
