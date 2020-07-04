@@ -94,7 +94,7 @@ class levels(commands.Cog):
 
         for memberid in self.dbcursor:
             memberName = ctx.message.guild.get_member(memberid[0])
-            self.dbcursor.execute(f"INSERT INTO members (username) VALUES ({memberName})")
+            self.dbcursor.execute("INSERT INTO members (username) VALUES (%s)", (memberName))
             db.commit()
 
             print(memberName) #for testing
