@@ -14,7 +14,7 @@ class levels(commands.Cog):
 
     def __init__(self, client):  
         self.client = client
-        self.dbcursor = db.cursor()
+        self.dbcursor = db.cursor(buffered=True)
     
     async def update_levels(self, member):
         #checks if members id exists in database
