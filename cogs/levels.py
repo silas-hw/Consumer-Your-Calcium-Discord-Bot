@@ -93,7 +93,7 @@ class levels(commands.Cog):
         self.dbcursor.execute("SELECT memberid FROM members")
 
         for memberid in self.dbcursor:
-            memberName = ctx.message.guild.get_member(memberid[0])
+            memberName = str(ctx.message.guild.get_member(memberid[0]))
             self.dbcursor.execute("INSERT INTO members (username) VALUES (%s)", (memberName))
             db.commit()
 
