@@ -19,9 +19,10 @@ class levels(commands.Cog):
     async def update_levels(self, member):
         #checks if members id exists in database
         self.dbcursor.execute(f"SELECT memberid FROM members WHERE memberid = {member.id}")
+        
         id = self.dbcursor.fetchone()
         if not id:
-            self.dbcursor.execute("INSERT INTO members (memberid, xp, level, messages) VALUES (%s, %s, %s, %s)", (member.id, 0, 0, 0))
+            self.dbcursor.execute("INSERT INTO members (username, memberid, xp, level, messages) VALUES (%s, %s, %s, %s)", (str(member.name), member.id, 0, 0, 0))
             db.commit()
 
     async def add_xp(self, member, xp):
@@ -87,18 +88,12 @@ class levels(commands.Cog):
         #send message
         await ctx.send(message)
     
+    #adds members username to database
     @commands.command()
-    async def addMemberNames(self, ctx):
+    async def addName(self, ctx):
 
-        self.dbcursor.execute("SELECT memberid FROM members")
-
-        for memberid in self.dbcursor:
-            print(memberid)
-            memberName = str(ctx.message.guild.get_member(memberid[0]))
-            self.dbcursor.execute(f"UPDATE members SET username = '{memberName}' WHERE memberid = {memberid[0]}")
-            db.commit()
-
-            print(memberName) #for testing
+        self.dbcursor.execute(f"UPDATE members SET username = '{str(ctx.message.author.name)}' WHERE memberid = {ctx.message.author.id}")
+        db.commit()
 
 def setup(client):
     client.add_cog(levels(client))
