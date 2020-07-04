@@ -92,9 +92,12 @@ class levels(commands.Cog):
 
         self.dbcursor.execute("SELECT memberid FROM members")
 
-        for x in self.dbcursor:
-            memberName = ctx.message.guild.get_member(x[0])
-            print(str(memberName))
+        for memberid in self.dbcursor:
+            memberName = ctx.message.guild.get_member(memberid[0])
+            self.dbcursor.execute(f"INSERT INTO members (username) VALUES ({memberName})")
+            db.commit()
+
+            print(memberName) #for testing
 
 def setup(client):
     client.add_cog(levels(client))
