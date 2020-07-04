@@ -22,7 +22,7 @@ class levels(commands.Cog):
         
         id = self.dbcursor.fetchone()
         if not id:
-            self.dbcursor.execute("INSERT INTO members (username, memberid, xp, level, messages) VALUES (%s, %s, %s, %s)", (str(member.name), member.id, 0, 0, 0))
+            self.dbcursor.execute("INSERT INTO members (username, memberid, xp, level, messages) VALUES (%s, %s, %s, %s, %s)", (str(member.name), member.id, 0, 0, 0))
             db.commit()
 
     async def add_xp(self, member, xp):
