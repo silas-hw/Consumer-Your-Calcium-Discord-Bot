@@ -88,11 +88,11 @@ class levels(commands.Cog):
         #send message
         await ctx.send(message)
     
-    #adds members username to database
+    #updates users twitter handle in MySQL database
     @commands.command()
-    async def addName(self, ctx):
+    async def twitter(self, ctx, handle):
 
-        self.dbcursor.execute(f"UPDATE members SET username = '{str(ctx.message.author.name)}' WHERE memberid = {ctx.message.author.id}")
+        self.dbcursor.execute(f"UPDATE members SET twitter = '{handle}' WHERE memberid = {ctx.message.author.id}" )
         db.commit()
 
 def setup(client):
