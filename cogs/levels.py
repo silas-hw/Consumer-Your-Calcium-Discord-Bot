@@ -51,7 +51,7 @@ class levels(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if not message.author.bot and self.client.command_prefix not in message.content: #if member sending message isn't a bot account
+        if not message.author.bot and str(self.client.command_prefix) not in str(message.content): #if member sending message isn't a bot account
             
             await self.update_levels(message.author)
             await self.add_xp(message.author, 5)
