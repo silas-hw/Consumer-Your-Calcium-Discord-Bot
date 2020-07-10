@@ -38,7 +38,7 @@ class useful(commands.Cog):
                     await textChannel.send(f"<:zzz:727916453466210434> {member} is afk")
     
     #mentions a role or member after a given amount of time has passed
-    @commands.command(brief="Reminds friends to play games", description="mentions role/user after given amount of minutes has passed")
+    @commands.command(brief="Reminds members or roles", description="mentions role/user after given time has passed\nWhen using 24 hr time it is only possible to set a reminder within the same day,\n a possible way of getting around this is setting a reminder in minutes")
     async def reminder(self, ctx, users, timeStr = "5", *, message="reminder"):
         
         if re.search(r"\d\d:\d\d", timeStr): #checks formatting of time given
