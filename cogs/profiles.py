@@ -39,5 +39,12 @@ class profiles(commands.Cog):
 
             await ctx.send(f"<:pushpin:731608868420845608> *'{message}'* pinned!'")
 
+    @commands.Command(brief="Add an image to your profile")
+    async def image(self, ctx):
+
+        imageUrl = ctx.message.attachments[0].url
+        self.dbcursor.execute(f"UPDATE members SET pinnedImage = '{imageUrl}' WHERE memberid = {ctx.message.author.id}")
+        db.commit()
+
 def setup(client):
     client.add_cog(profiles(client))
