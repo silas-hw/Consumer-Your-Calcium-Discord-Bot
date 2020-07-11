@@ -37,7 +37,7 @@ class profiles(commands.Cog):
             self.dbcursor.execute(f"UPDATE members SET pinned = '{message}' WHERE memberid = {ctx.message.author.id}")
             db.commit()
 
-            await ctx.send(f"<:pushpin:731608868420845608> *'{message}'* pinned!'")
+            await ctx.send(f"<:pushpin:731608868420845608> *'{message}'* pinned!")
 
     @commands.command(brief="Add an image to your profile")
     async def image(self, ctx):
