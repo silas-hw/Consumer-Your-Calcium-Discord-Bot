@@ -27,5 +27,15 @@ class profiles(commands.Cog):
 
         await ctx.send("<:ballot_box_with_check:730138696069939331> twitter handle updated!")
 
+    #adds pinned message to be shown on members profile
+    @commands.command(brief="Pin a message!")
+    async def pin(self, ctx, *, message):
+
+        if len(message) > 50:
+            await ctx.send("Message must be 50 characters or less")
+        else:
+            self.dbcursor.execute(f"UPDATE members SET pinned = '{message}' WHERE memberid = {ctx.message.author.id}")
+            db.commit()
+
 def setup(client):
     client.add_cog(profiles(client))
