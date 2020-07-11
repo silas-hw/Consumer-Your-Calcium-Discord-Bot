@@ -19,7 +19,7 @@ class profiles(commands.Cog):
         self.dbcursor = db.cursor(buffered=True)
 
     #updates users twitter handle in MySQL database
-    @commands.command(brief="Adds your twitter feed to the website", description="Adds your twitter handle to the database so your feed appears on your profile on http://silashw.heliost.org/\nSimply type your twitter handle *(without @)* after the command")
+    @commands.command(brief="Adds your twitter feed to the website", description="Adds your twitter handle to the database so your feed appears on your profile on the website\nSimply type your twitter handle *(without @)* after the command")
     async def twitter(self, ctx, handle):
 
         self.dbcursor.execute(f"UPDATE members SET twitter = '{handle}' WHERE memberid = {ctx.message.author.id}" )
