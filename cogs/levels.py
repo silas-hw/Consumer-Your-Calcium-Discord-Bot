@@ -23,7 +23,7 @@ class levels(commands.Cog):
         
         id = self.dbcursor.fetchone()
         if not id:
-            self.dbcursor.execute("INSERT INTO members (username, memberid, xp, level, messages) VALUES (%s, %s, %s, %s, %s)", (str(member.name), member.id, 0, 0, 0))
+            self.dbcursor.execute("INSERT INTO members (username, memberid, xp, level, messages, pic_url) VALUES (%s, %s, %s, %s, %s, %s)", (str(member.name), member.id, 0, 0, 0, str(member.avatar_url)))
             db.commit()
         else:
             self.dbcursor.execute(f"UPDATE members SET pic_url= '{str(member.avatar_url)}' WHERE memberid = {member.id}")
