@@ -1,4 +1,5 @@
 #modules
+import asyncio
 import mysql.connector
 import json
 import discord
@@ -54,6 +55,8 @@ class levels(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if not message.author.bot and str(self.client.command_prefix) not in str(message.content): #if member sending message isn't a bot account
+
+            await asyncio.sleep(60) #wait a minute to avoid sql error
             
             await self.update_levels(message.author)
             await self.add_xp(message.author, 5)
