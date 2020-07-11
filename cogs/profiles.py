@@ -46,5 +46,7 @@ class profiles(commands.Cog):
         self.dbcursor.execute(f"UPDATE members SET pinnedImage = '{imageUrl}' WHERE memberid = {ctx.message.author.id}")
         db.commit()
 
+        await ctx.send("Image added")
+
 def setup(client):
     client.add_cog(profiles(client))
