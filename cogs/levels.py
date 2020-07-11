@@ -24,6 +24,8 @@ class levels(commands.Cog):
         if not id:
             self.dbcursor.execute("INSERT INTO members (username, memberid, xp, level, messages) VALUES (%s, %s, %s, %s, %s)", (str(member.name), member.id, 0, 0, 0))
             db.commit()
+        else:
+            self.dbcursor.execute(f"UPDATE members SET pic_url={member.avatar_url} WHERE memberid = {member.id}")
 
     async def add_xp(self, member, xp):
         self.dbcursor.execute(f"SELECT xp FROM members WHERE memberid = {member.id}")

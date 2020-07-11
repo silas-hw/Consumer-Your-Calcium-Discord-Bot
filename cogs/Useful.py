@@ -41,23 +41,35 @@ class useful(commands.Cog):
     @commands.command(brief="Reminds members or roles", description="mentions role/user after given time has passed\nWhen using 24 hr time it is only possible to set a reminder within the same day,\n a possible way of getting around this is setting a reminder in minutes")
     async def reminder(self, ctx, users, timeStr = "5", *, message="reminder"):
         
-        if re.search(r"\d\d:\d\d", timeStr): #checks formatting of time given
-            givenHourStr, givenMinuteStr = timeStr.split(":") #the numbers seperated by the : are assigned to two variables
+        try:
+            #if in 24 hour time format
+            if re.search(r"\d\d:\d\d", timeStr): #checks formatting of time given
+                
+                givenHourStr, givenMinuteStr = timeStr.split(":") #the numbers seperated by the : are assigned to two variables
+                
+                #sets the hour and minute of when the command was sent
+                tz = pytz.timezone('Europe/London') #sets timezone to be used to get current hour and minute
+                currentHour = datetime.now(tz).hour
+                currentMinute = datetime.now(tz).minute
+
+                #calculates the amount time that needs to pass in seconds
+                hour, minute = int(givenHourStr) - currentHour, int(givenMinuteStr) - currentMinute
+                time = hour*60**2 + minute*60
+
+                await ctx.send(f"<:bell:727914124230787104> Reminder set for {timeStr} with message '{message}'")
+
+            #if time is given in minutes
+            else:
+
+                #calculates amount of time that needs to pass in seconds
+                time = int(timeStr)*60
+                await ctx.send(f"<:bell:727914124230787104> Reminder set for {timeStr} minutes with message '{message}'")
             
-            tz = pytz.timezone('Europe/London') #sets timezone to be used to get current hour and minute
-            currentHour = datetime.now(tz).hour
-            currentMinute = datetime.now(tz).minute
-
-            hour, minute = int(givenHourStr) - currentHour, int(givenMinuteStr) - currentMinute
-            time = hour*60**2 + minute*60
-
-            await ctx.send(f"<:bell:727914124230787104> Reminder set for {timeStr} with message '{message}'")
-        else:
-            time = int(timeStr)*60
-            await ctx.send(f"<:bell:727914124230787104> Reminder set for {time/60} minutes with message '{message}'")
-        
-        await asyncio.sleep(time)
-        await ctx.send(f"<:bell:727914124230787104> {users} {message} *(reminder set by {ctx.message.author})*")
+            await asyncio.sleep(time)
+            await ctx.send(f"<:bell:727914124230787104> {users} {message} *(reminder set by {ctx.message.author})*")
+        except:
+            
+            await ctx.send("Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!")
 
     #gives information of given user
     @commands.command(aliases=["info", "i"], brief="get details of any member")
@@ -77,6 +89,7 @@ class useful(commands.Cog):
             title = str(member.name),
             description = message
         )
+        
         embed.set_image(url=member.avatar_url)
         await ctx.send(embed=embed)
 
