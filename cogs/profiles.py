@@ -39,7 +39,7 @@ class profiles(commands.Cog):
 
             await ctx.send(f"<:pushpin:731608868420845608> *'{message}'* pinned!'")
 
-    @commands.Command(brief="Add an image to your profile")
+    @commands.command(brief="Add an image to your profile")
     async def image(self, ctx):
 
         imageUrl = ctx.message.attachments[0].url
