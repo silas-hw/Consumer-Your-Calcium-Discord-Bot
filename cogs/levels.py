@@ -93,14 +93,5 @@ class levels(commands.Cog):
         #send message
         await ctx.send(message)
     
-    #updates users twitter handle in MySQL database
-    @commands.command()
-    async def twitter(self, ctx, handle):
-
-        self.dbcursor.execute(f"UPDATE members SET twitter = '{handle}' WHERE memberid = {ctx.message.author.id}" )
-        db.commit()
-
-        await ctx.send("<:ballot_box_with_check:730138696069939331> twitter handle updated!")
-
 def setup(client):
     client.add_cog(levels(client))
