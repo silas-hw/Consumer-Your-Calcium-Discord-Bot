@@ -37,5 +37,7 @@ class profiles(commands.Cog):
             self.dbcursor.execute(f"UPDATE members SET pinned = '{message}' WHERE memberid = {ctx.message.author.id}")
             db.commit()
 
+            await ctx.send(f"<:pushpin:731608868420845608> *'{message}'* pinned!'")
+
 def setup(client):
     client.add_cog(profiles(client))
