@@ -17,14 +17,14 @@ class Admin(commands.Cog):
         self.client = client
         self.mutedMembers = []
     
-    @commands.command(aliases=["announce"])
+    @commands.command(aliases=["announce"], brief="Makes an announcement", description="mention everyone with an announcement sent by the bot", usage=r"//announcement test announcement")
     @check_owner()
     async def announcement(self, ctx, *, message):
 
         await ctx.message.delete() #deletes message used to invoke command
         await ctx.send(f"{ctx.message.guild.default_role} {message}")
     
-    @commands.command(brief="mutes a member", description="any message sent by a muted member will be deleted")
+    @commands.command(brief="mutes a member", description="any message sent by a muted member will be deleted", usage=r"//mute @CleanlyWolf#5407")
     @check_admin()
     async def mute(self, ctx, member: discord.Member):
 

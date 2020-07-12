@@ -7,8 +7,8 @@ from discord.ext import commands
 
 db = mysql.connector.connect (
     host="johnny.heliohost.org",
-    user="silashw",
-    passwd="elephantCode88",
+    user="silashw_user2",
+    passwd="<code88>oneuser",
     database="silashw_levelsData"
 )
 class levels(commands.Cog):
@@ -62,7 +62,7 @@ class levels(commands.Cog):
             await self.add_xp(message.author, 5)
             await self.level_up(message.author, message.channel)
 
-    @commands.command()
+    @commands.command(brief="Displays information about your level", description="Displays level and xp information alonside a nifty progress bar", usage=r"//level")
     async def level(self, ctx):
         
         self.dbcursor.execute(f"SELECT xp, level FROM members WHERE memberid = {ctx.message.author.id}")

@@ -4,8 +4,7 @@ import os
 import discord
 from discord.ext import commands
 
-client = commands.Bot(command_prefix = get_prefix)
-client.remove_command('help')
+
 
 #check to allow some commands to only be accessed by owner
 def check_owner():
@@ -19,6 +18,9 @@ def get_prefix(client, message):
         prefixes = json.load(f)
 
     return prefixes[str(message.guild.id)]
+
+client = commands.Bot(command_prefix = get_prefix)
+client.remove_command('help')
 
 @client.event
 async def on_ready():

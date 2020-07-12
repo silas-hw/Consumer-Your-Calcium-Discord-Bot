@@ -12,7 +12,7 @@ class useful(commands.Cog):
         self.client = client
         self.afkUsers = {}
 
-    @commands.command()
+    @commands.command(brief="Set yourself as afk", description="set yourself as afk so if others mention you they are told", usage=r"//afk foo bar")
     async def afk(self, ctx, *, userMessage=" "):
 
         #if user is already afk, remove them from the afk dict, if not add them to it
@@ -38,7 +38,7 @@ class useful(commands.Cog):
                     await textChannel.send(f"<:zzz:727916453466210434> {member} is afk")
     
     #mentions a role or member after a given amount of time has passed
-    @commands.command(brief="Reminds members or roles", description="mentions role/user after given time has passed\nWhen using 24 hr time it is only possible to set a reminder within the same day,\n a possible way of getting around this is setting a reminder in minutes")
+    @commands.command(brief="Reminds members or roles", description="mentions role/user after given time has passed\nWhen using 24 hr time it is only possible to set a reminder within the same day,\n a possible way of getting around this is setting a reminder in minutes", usage=r"//reminder @CleanlyWolf#5407 14:00 reeeeeee")
     async def reminder(self, ctx, users, timeStr = "5", *, message="reminder"):
         
         try:
@@ -72,7 +72,7 @@ class useful(commands.Cog):
             await ctx.send("Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!")
 
     #gives information of given user
-    @commands.command(aliases=["info", "i"], brief="get details of any member")
+    @commands.command(aliases=["info", "i"], brief="get details of any member", description="get the nickname, date joined, top role and current status of any member", usage=r"//info @CleanlyWolf#5407")
     async def information(self, ctx, member: discord.Member):
 
         message = ""
