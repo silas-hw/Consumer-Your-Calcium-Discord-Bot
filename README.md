@@ -70,7 +70,7 @@ This website also has profiles, which the `//image`, `//pin` and `//twitter` com
 
 ## Hosted by  
 * ~~[heroku](www.heroku.com) *for bot hosting*~~  
-* [GCP](cloud.google.com) *for bot hosting*  
+* [GCP](https://cloud.google.com) *for bot hosting*  
 * [heliohost](https://www.heliohost.org/) *for MySql database hosting*    
 
 ## Authors
