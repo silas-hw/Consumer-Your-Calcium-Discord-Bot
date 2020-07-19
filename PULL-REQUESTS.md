@@ -10,7 +10,7 @@ features with a seperate .py file and bot token and then add them to the fork wh
   
 # Requirements  
 Requirements for creating pull-requests are:  
-* Use proper [https://www.python.org/dev/peps/pep-0008/#function-and-variable-names](naming conventions)
+* Use proper [naming conventions](https://www.python.org/dev/peps/pep-0008/#function-and-variable-names)
 * Don't have spaghetti code  
 * Properly explain, possibly with examples, what your new commands do or how you've changed current commands  
 * Don't add new commands to the main.py file  
