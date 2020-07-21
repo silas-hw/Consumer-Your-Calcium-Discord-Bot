@@ -48,7 +48,7 @@ class Help(commands.Cog):
                     description = 'No description available'
 
                 #add the command name, descriptio and usage to the help message with formatting
-                helpMessage += f"**{command}**\n{description}\n*{example}*"
+                helpMessage += f"__**{command}**__\n{description}\n\n*{example}*"
             
             #if the command given doesn't exist
             except:
