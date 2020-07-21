@@ -14,4 +14,4 @@ Requirements for creating pull-requests are:
 * Don't have spaghetti code  
 * Properly explain, possibly with examples, what your new commands do or how you've changed current commands  
 * Don't add new commands to the main.py file  
-
+* Comment your code
