@@ -32,7 +32,7 @@ class Help(commands.Cog):
 
                     #add command name and brief to the help message with formatting
                     helpMessage += f"    **{cmd}**:\n"
-                    helpMessage += f"        *{brief}*\n"
+                    helpMessage += f"    *{brief}*\n"
 
                 helpMessage += "\n"
 
@@ -48,7 +48,7 @@ class Help(commands.Cog):
                     description = 'No description available'
 
                 #add the command name, descriptio and usage to the help message with formatting
-                helpMessage += f"**{command}**\n\n{description}\n\n    *{example}*"
+                helpMessage += f"**{command}**\n{description}\n*{example}*"
             
             #if the command given doesn't exist
             except:
