@@ -70,7 +70,7 @@ This website also has profiles, which the `//image`, `//pin` and `//twitter` com
 
 ## Hosted by  
 * ~~[heroku](www.heroku.com) *for bot hosting*~~  
-* [GCP](cloud.google.com) *for bot hosting*  
+* [GCP](https://cloud.google.com) *for bot hosting*  
 * [heliohost](https://www.heliohost.org/) *for MySql database hosting*    
 
 ## Authors
@@ -79,5 +79,4 @@ This website also has profiles, which the `//image`, `//pin` and `//twitter` com
 ## Special thanks  
 * [ZOD14C](https://steamcommunity.com/profiles/76561198985320935) *(steam)* for creating the Consume Your Calcium server  
 * [Theblockbuster1](https://github.com/Theblockbuster1) *(github)* for helping with understanding of code  
-
 
