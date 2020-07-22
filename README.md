@@ -66,6 +66,7 @@ This website also has profiles, which the `//image`, `//pin` and `//twitter` com
 * [asyncio](https://docs.python.org/3/library/asyncio.html) for asynchronous functions  
 * [python](https://www.python.org/) as the main programming language    
 * [pytz](https://pypi.org/project/pytz/) for timezones  
+* [morsepy](https://pypi.org/project/morsepy/) for morse translation  
 * [MySql](https://www.mysql.com/) for sql database handling  
 
 ## Hosted by  
