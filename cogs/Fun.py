@@ -12,7 +12,7 @@ class Fun(commands.Cog):
 
         try:
             cipher = mpy.encrypt(string)
-            await ctx.send(f"Morse - {cipher}")
+            await ctx.send(f"Morse: {cipher}")
         except:
             await ctx.send("Invalid character! - for more info type `//help decrypt`")
 
@@ -21,7 +21,7 @@ class Fun(commands.Cog):
 
         try:
             decipher = mpy.decrypt(morse)
-            await ctx.send(f"English - {decipher}")
+            await ctx.send(f"English: {decipher}")
         except:
             await ctx.send("Invalid morse character or incorrect formatting - for more info type `//help decrypt`")
 
