@@ -140,7 +140,7 @@ class Misc(commands.Cog):
         await ctx.send("You'll now be pinged for announcements in <#684458229090353222>")
 
     #react to the message before the command with a given set of emojis
-    @commands.command(brief="reacts to messages", description="Reacts to the previous message sent\nThe message used to invoke the command is deleted", usage=r"//react epic")
+    @commands.command(aliases=['r'], brief="reacts to messages", description="Reacts to the previous message sent\nThe message used to invoke the command is deleted", usage=r"//react epic")
     async def react(self, ctx, reaction='epic'):
 
         await ctx.message.delete()
