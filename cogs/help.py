@@ -15,28 +15,13 @@ class Help(commands.Cog):
         #if a command wasn't passed
         if command == None:
             
-            #iterate through a list of every cog 
-            for cog in self.client.cogs:
-                
-                helpMessage += f"__**{cog}**__:\n"
-                cogInstance = self.client.get_cog(cog) #get the object related to the cog
-
-                #iterate through every command in the cog instance
-                for cmd in cogInstance.get_commands():
-                    
-                    #get the brief attribute from the command and if it is empty change it to 'no brief available'
-                    brief = self.client.get_command(str(cmd)).short_doc
-
-                    if brief == '':
-                        brief = 'No brief available'
-
-                    #add command name and brief to the help message with formatting
-                    helpMessage += f"    **{cmd}**:\n"
-                    helpMessage += f"    *{brief}*\n"
-
-                helpMessage += "\n"
+            helpEmbed = discord.Embed(
+                title="Calcium Consumer",
+                url="https://bit.ly/3hC6aCN",
+                description="ℹ️ Click [here](https://bit.ly/3hC6aCN) for a full list of commands\n\n❓ Type `//help <command>` for more detail on any command\n\n🖥️ Visit [here](http://silashw.heliohost.org) for the leaderboard"
+            )
             
-            helpMessage += "\n Visit https://bit.ly/3hC6aCN for more detail"
+            await ctx.send(embed=helpEmbed)
 
         else:
 
@@ -51,13 +36,14 @@ class Help(commands.Cog):
 
                 #add the command name, descriptio and usage to the help message with formatting
                 helpMessage += f"__**{command}**__\n{description}\n\n*{example}*"
+
+                await ctx.send(helpMessage)
+
             
             #if the command given doesn't exist
             except:
                 await ctx.send("Command does not exist")
                 return
-
-        await ctx.send(helpMessage)
 
 def setup(client):
     client.add_cog(Help(client))
