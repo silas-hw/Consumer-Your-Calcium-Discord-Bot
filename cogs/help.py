@@ -17,8 +17,8 @@ class Help(commands.Cog):
             
             helpEmbed = discord.Embed(
                 title="Calcium Consumer",
-                url="https://bit.ly/3hC6aCN",
-                description="ℹ️ Click [here](https://bit.ly/3hC6aCN) for a full list of commands\n\n❓ Type `//help <command>` for more detail on any command\n\n🖥️ Visit [here](http://silashw.heliohost.org) for the leaderboard"
+                url="https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/wiki/Commands",
+                description="ℹ️ [Click here](https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/wiki/Commands) for a full list of commands\n\n❓ Type `//help <command>` for more detail on any command\n\n🖥️ [Visit here](http://silashw.heliohost.org) for the leaderboard"
             )
             
             await ctx.send(embed=helpEmbed)
