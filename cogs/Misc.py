@@ -72,6 +72,43 @@ class Misc(commands.Cog):
             
             await ctx.send("Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!")
 
+    @commands.command()
+    async def poll(self, ctx, waitTime: float, text):
+        
+        #used to check message sent by user
+        def check(m):
+            return m.channel == ctx.message.channel and m.author == ctx.message.author and m.content.lower() == 'y' or m.content.lower() == 'n'
+
+        try:
+            confirm_msg = await ctx.send(f"Create poll '{text}' with wait time {waitTime} minutes? (y/n)")
+            user_msg = await self.client.wait_for('message', timeout=60, check=check)
+            
+            if user_msg.content == "y":
+                await confirm_msg.delete()
+                await ctx.message.delete()
+                await user_msg.delete()
+
+                message = await ctx.send(f"Poll by *{ctx.message.author}*:\n{text}")  
+                for emoji in ['👍', '👎']:
+                    await message.add_reaction(emoji)
+
+                await asyncio.sleep(waitTime*60)
+                
+                cache_msg = await ctx.message.channel.fetch_message(message.id)
+                yes_count = cache_msg.reactions[0].count-1
+                no_count = cache_msg.reactions[1].count-1
+
+                poll_msg = await ctx.send(f"Poll: {text} ~\nYes: {yes_count}\nNo: {no_count}")
+
+                confirmEmbed = discord.Embed()
+                confirmEmbed.add_field(name="Poll Completed", value=f"Your poll [`{text}`]({poll_msg.jump_url}) has completed\n View the results [here]({poll_msg.jump_url})")
+                await ctx.author.send(embed=confirmEmbed)
+            
+        except:
+            embed = discord.Embed()
+            embed.add_field(name="Poll Error", value=f" Your poll [`{text}`]({ctx.message.jump_url}) in the `{ctx.guild.name}` server timed out after 60 seconds\nIn future, to confirm your poll type y or n")
+            await ctx.author.send(embed=embed)
+
     #gives information of given user
     @commands.command(aliases=["info", "i"], brief="get details of any member", description="get the nickname, date joined, top role and current status of any member", usage=r"//info @CleanlyWolf#5407")
     async def information(self, ctx, member: discord.Member):
