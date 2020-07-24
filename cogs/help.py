@@ -35,6 +35,8 @@ class Help(commands.Cog):
                     helpMessage += f"    *{brief}*\n"
 
                 helpMessage += "\n"
+            
+            helpMessage += "\n Visit https://bit.ly/3hC6aCN for more detail"
 
         else:
 
