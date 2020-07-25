@@ -83,7 +83,7 @@ class Misc(commands.Cog):
             confirm_msg = await ctx.send(f"Create poll '{text}' with wait time {waitTime} minutes? (y/n)")
             user_msg = await self.client.wait_for('message', timeout=60, check=check)
             
-            if user_msg.content == "y":
+            if user_msg.content.lower() == "y":
                 await confirm_msg.delete()
                 await ctx.message.delete()
                 await user_msg.delete()
