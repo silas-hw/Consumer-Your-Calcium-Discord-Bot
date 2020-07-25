@@ -22,7 +22,9 @@ class Levels(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        self.sqlreconnect.start()
+        
+        # pylint: disable=no-member
+        self.sqlreconnect.start() 
     
     async def update_levels(self, member):
         
