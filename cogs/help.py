@@ -30,14 +30,13 @@ class Help(commands.Cog):
                 description = self.client.get_command(command).description
                 example = self.client.get_command(command).usage
 
-                #if the description is an empty string
                 if description == '':
                     description = 'No description available'
 
-                #add the command name, descriptio and usage to the help message with formatting
-                helpMessage += f"__**{command}**__\n{description}\n\n*{example}*"
+                helpMessage = discord.Embed(title="Calcium Consumer Help")
+                helpMessage.add_field(name=command, value=f"{description}\n\n`{example}`")
 
-                await ctx.send(helpMessage)
+                await ctx.send(embed=helpMessage)
 
             
             #if the command given doesn't exist
