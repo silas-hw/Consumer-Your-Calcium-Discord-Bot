@@ -82,7 +82,6 @@ class Misc(commands.Cog):
         try:
             confirm_msg = await ctx.send(f"Create poll '{text}' with wait time {waitTime} minutes? (y/n)")
             user_msg = await self.client.wait_for('message', timeout=60, check=check)
-            
             if user_msg.content.lower() == "y":
                 await confirm_msg.delete()
                 await ctx.message.delete()
@@ -96,8 +95,6 @@ class Misc(commands.Cog):
 
                 await asyncio.sleep(waitTime*60)
 
-                resultText = ""
-                
                 #count number of reactions on message
                 cache_msg = await ctx.message.channel.fetch_message(message.id)
                 yes_count = cache_msg.reactions[0].count-1
@@ -110,7 +107,7 @@ class Misc(commands.Cog):
                 no_squares = int(no_count/(total/10))
                 no_percent = int((no_count/total)*100)
 
-                resultText += f"\nYes: {yes_percent}% "
+                resultText = f"\nYes: {yes_percent}% "
                 for _ in range(yes_squares):
                     resultText += "<:blue_square:736366642719621211>"
                 for _ in range(10-yes_squares):
