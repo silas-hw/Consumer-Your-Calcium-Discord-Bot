@@ -24,6 +24,8 @@ class Profiles(commands.Cog):
     #when the bot is ready start the sqlreconnect2 task
     @commands.Cog.listener()
     async def on_ready(self):
+
+        # pylint: disable=no-member
         self.sqlreconnect2.start()
 
     #updates users twitter handle in MySQL database
