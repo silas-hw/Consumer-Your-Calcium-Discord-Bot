@@ -72,7 +72,7 @@ class Misc(commands.Cog):
             
             await ctx.send("Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!")
 
-    @commands.command(brief="Make a poll and have the results given after a certain amount of time", description="Make a poll that can be people can vote yes or no to\nYou give the time the poll should remain active followed by what the poll is about", usage=r"//poll 5 Haha brrrrr?")
+    @commands.command(brief="Make a poll and have the results given after a certain amount of time", description="Make a poll that can be people can vote yes or no to\nYou give the time in minutes the poll should remain active followed by what the poll is about", usage=r"//poll 5 Haha brrrrr?")
     async def poll(self, ctx, waitTime: float, *, text):
         
         #used to check message sent by user
