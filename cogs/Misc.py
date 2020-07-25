@@ -72,8 +72,8 @@ class Misc(commands.Cog):
             
             await ctx.send("Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!")
 
-    @commands.command()
-    async def poll(self, ctx, waitTime: float, text):
+    @commands.command(brief="Make a poll and have the results given after a certain amount of time", description="Make a poll that can be people can vote yes or no to\nYou give the time the poll should remain active followed by what the poll is about", usage=r"//poll 5 Haha brrrrr?")
+    async def poll(self, ctx, waitTime: float, *, text):
         
         #used to check message sent by user
         def check(m):
@@ -88,17 +88,39 @@ class Misc(commands.Cog):
                 await ctx.message.delete()
                 await user_msg.delete()
 
-                message = await ctx.send(f"Poll by *{ctx.message.author}*:\n{text}")  
+                message = await ctx.send(f"Poll by {ctx.message.author}:\n{text}")  
                 for emoji in ['👍', '👎']:
                     await message.add_reaction(emoji)
 
                 await asyncio.sleep(waitTime*60)
                 
+                result = f"Poll: `{text}`` by {ctx.message.author} *(<{message.jump_url}>)*"
+                
+                #count number of reactions on message
                 cache_msg = await ctx.message.channel.fetch_message(message.id)
                 yes_count = cache_msg.reactions[0].count-1
                 no_count = cache_msg.reactions[1].count-1
 
-                poll_msg = await ctx.send(f"Poll: {text} ~\nYes: {yes_count}\nNo: {no_count}")
+                #add percent bars to result message
+                total = yes_count + no_count
+                yes_squares = int(yes_count/(total/10))
+                yes_percent = int((yes_count/total)*100)
+                no_squares = int(no_count/(total/10))
+                no_percent = int((no_count/total)*100)
+
+                result += f"\nYes: {yes_percent}% "
+                for _ in range(yes_squares):
+                    result += "<:blue_square:736366642719621211>"
+                for _ in range(10-yes_squares):
+                    result += "<:white_large_square:728029678799159397>"
+
+                result += f"\nNo: {no_percent}% "
+                for _ in range(no_squares):
+                    result += "<:green_square:728017489690099834>"
+                for _ in range(10-no_squares):
+                    result += "<:white_large_square:728029678799159397>"
+
+                poll_msg = await ctx.send(result)
 
                 confirmEmbed = discord.Embed()
                 confirmEmbed.add_field(name="Poll Completed", value=f"Your poll [`{text}`]({poll_msg.jump_url}) has completed\n View the results [here]({poll_msg.jump_url})")
@@ -106,7 +128,7 @@ class Misc(commands.Cog):
             
         except:
             embed = discord.Embed()
-            embed.add_field(name="Poll Error", value=f" Your poll [`{text}`]({ctx.message.jump_url}) in the `{ctx.guild.name}` server timed out after 60 seconds\nIn future, to confirm your poll type y or n")
+            embed.add_field(name="Poll Error", value=f" Your poll [`{text}`]({ctx.message.jump_url}) in the `{ctx.guild.name}` server timed out or some other error occured\nIn future, to confirm your poll type y or n")
             await ctx.author.send(embed=embed)
 
     #gives information of given user
