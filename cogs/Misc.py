@@ -88,13 +88,15 @@ class Misc(commands.Cog):
                 await ctx.message.delete()
                 await user_msg.delete()
 
-                message = await ctx.send(f"Poll by {ctx.message.author}:\n{text}")  
+                pollEmbed = discord.Embed()
+                pollEmbed.add_field(name=f"Poll by {ctx.message.author}", value=text)
+                message = await ctx.send(embed=pollEmbed)  
                 for emoji in ['👍', '👎']:
                     await message.add_reaction(emoji)
 
                 await asyncio.sleep(waitTime*60)
-                
-                result = f"Poll: `{text}`` by {ctx.message.author} *(<{message.jump_url}>)*"
+
+                resultText = ""
                 
                 #count number of reactions on message
                 cache_msg = await ctx.message.channel.fetch_message(message.id)
@@ -108,19 +110,22 @@ class Misc(commands.Cog):
                 no_squares = int(no_count/(total/10))
                 no_percent = int((no_count/total)*100)
 
-                result += f"\nYes: {yes_percent}% "
+                resultText += f"\nYes: {yes_percent}% "
                 for _ in range(yes_squares):
-                    result += "<:blue_square:736366642719621211>"
+                    resultText += "<:blue_square:736366642719621211>"
                 for _ in range(10-yes_squares):
-                    result += "<:white_large_square:728029678799159397>"
+                    resultText += "<:white_large_square:728029678799159397>"
 
-                result += f"\nNo: {no_percent}% "
+                resultText += f"\nNo: {no_percent}% "
                 for _ in range(no_squares):
-                    result += "<:green_square:728017489690099834>"
+                    resultText += "<:green_square:728017489690099834>"
                 for _ in range(10-no_squares):
-                    result += "<:white_large_square:728029678799159397>"
+                    resultText += "<:white_large_square:728029678799159397>"
 
-                poll_msg = await ctx.send(result)
+                result = discord.Embed(title="Poll", url=message.jump_url)
+                result.add_field(name=f"`{text}` by {ctx.message.author}", value=resultText)
+
+                poll_msg = await ctx.send(embed=result)
 
                 confirmEmbed = discord.Embed()
                 confirmEmbed.add_field(name="Poll Completed", value=f"Your poll [`{text}`]({poll_msg.jump_url}) has completed\n View the results [here]({poll_msg.jump_url})")
