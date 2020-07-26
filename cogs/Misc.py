@@ -115,7 +115,7 @@ class Misc(commands.Cog):
 
                 resultText += f"\nNo: {no_percent}% "
                 for _ in range(no_squares):
-                    resultText += "<:green_square:728017489690099834>"
+                    resultText += "<:red_square:736738749983227955>"
                 for _ in range(10-no_squares):
                     resultText += "<:white_large_square:728029678799159397>"
 
