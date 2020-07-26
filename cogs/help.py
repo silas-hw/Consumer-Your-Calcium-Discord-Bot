@@ -43,6 +43,11 @@ class Help(commands.Cog):
             except:
                 await ctx.send("Command does not exist")
                 return
-
+    
+    #give link to changelog
+    @commands.command(aliases=['log'], brief="Provides link to the change log", description="Gives a link to the changelog,\n where all notable and unreleased changes will be documented")
+    async def changelog(self, ctx):
+        await ctx.send('https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/blob/master/CHANGELOG.md')
+        
 def setup(client):
     client.add_cog(Help(client))
