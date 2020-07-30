@@ -81,18 +81,23 @@ class Misc(commands.Cog):
 
         try:
             confirm_msg = await ctx.send(f"Create poll '{text}' with wait time {waitTime} minutes? (y/n)")
-            user_msg = await self.client.wait_for('message', timeout=60, check=check)
+            user_msg = await self.client.wait_for('message', timeout=60, check=check) # allow 60 seconds for the user to reply, after 60 seconds and error is raised
+            
             if user_msg.content.lower() == "y":
+                
+                #delete messages involved in setup
                 await confirm_msg.delete()
                 await ctx.message.delete()
                 await user_msg.delete()
 
+                #create message for members to react to
                 pollEmbed = discord.Embed()
                 pollEmbed.add_field(name=f"Poll by {ctx.message.author}", value=text)
                 message = await ctx.send(embed=pollEmbed)  
                 for emoji in ['👍', '👎']:
                     await message.add_reaction(emoji)
 
+                #wait sepecified time
                 await asyncio.sleep(waitTime*60)
 
                 #count number of reactions on message
@@ -100,24 +105,22 @@ class Misc(commands.Cog):
                 yes_count = cache_msg.reactions[0].count-1
                 no_count = cache_msg.reactions[1].count-1
 
-                #add percent bars to result message
+                #calculate length of percentage bars of yes votes and no votes
                 total = yes_count + no_count
                 yes_squares = int(yes_count/(total/10))
                 yes_percent = int((yes_count/total)*100)
                 no_squares = int(no_count/(total/10))
                 no_percent = int((no_count/total)*100)
 
+                #yes votes percent bar
                 resultText = f"\nYes: {yes_percent}% "
-                for _ in range(yes_squares):
-                    resultText += "<:blue_square:736366642719621211>"
-                for _ in range(10-yes_squares):
-                    resultText += "<:white_large_square:728029678799159397>"
+                resultText += "<:blue_square:736366642719621211>"*yes_squares
+                resultText += "<:white_large_square:728029678799159397>"*(10-yes_squares)
 
+                #no votes percent bar
                 resultText += f"\nNo: {no_percent}% "
-                for _ in range(no_squares):
-                    resultText += "<:red_square:736738749983227955>"
-                for _ in range(10-no_squares):
-                    resultText += "<:white_large_square:728029678799159397>"
+                resultText += "<:red_square:736738749983227955>"*no_squares
+                resultText += "<:white_large_square:728029678799159397>"*(10-no_squares)
 
                 result = discord.Embed(title="Poll", url=message.jump_url)
                 result.add_field(name=f"`{text}` by {ctx.message.author}", value=resultText)
@@ -128,6 +131,10 @@ class Misc(commands.Cog):
                 confirmEmbed.add_field(name="Poll Completed", value=f"Your poll [`{text}`]({poll_msg.jump_url}) has completed\n View the results [here]({poll_msg.jump_url})")
                 await ctx.author.send(embed=confirmEmbed)
             
+            elif user_msg.content.lower() == "n":
+               await ctx.send('Ok!, poll declined')
+        
+        #if they didn't reply with y or n
         except:
             embed = discord.Embed()
             embed.add_field(name="Poll Error", value=f" Your poll [`{text}`]({ctx.message.jump_url}) in the `{ctx.guild.name}` server timed out or some other error occured\nIn future, to confirm your poll type y or n")
