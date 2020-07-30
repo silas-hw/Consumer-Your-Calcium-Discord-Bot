@@ -73,15 +73,36 @@ class Misc(commands.Cog):
             await ctx.send("Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!")
 
     @commands.command(brief="Make a poll and have the results given after a certain amount of time", description="Make a poll that can people can vote yes or no to\nYou give the time in minutes the poll should remain active followed by what the poll is about", usage=r"//poll 5 Haha brrrrr?")
-    async def poll(self, ctx, waitTime: float, *, text):
+    async def poll(self, ctx, waitTime: str, *, text):
         
         #used to check message sent by user
         def check(m):
             return m.channel == ctx.message.channel and m.author == ctx.message.author and m.content.lower() == 'y' or m.content.lower() == 'n'
 
         try:
-            confirm_msg = await ctx.send(f"Create poll '{text}' with wait time {waitTime} minutes? (y/n)")
-            user_msg = await self.client.wait_for('message', timeout=60, check=check) # allow 60 seconds for the user to reply, after 60 seconds and error is raised
+
+            #allow user to chose time type and use minutes as a defualt
+            if waitTime[-1].isnumeric():
+                time = float(waitTime)*60
+                timeType = "minutes"
+            elif waitTime[-1].lower() == "m":
+                waitTime = waitTime[:-1]
+                time = float(waitTime)*60
+                timeType = "minutes"
+            elif waitTime[-1].lower() == "h":
+                waitTime = waitTime[:-1]
+                time = float(waitTime)*3600
+                timeType = "hours"
+            elif waitTime[-1].lower() == "d":
+                waitTime = waitTime[:-1]
+                time = float(waitTime)*86400
+                timeType = "days"
+            else:
+                await ctx.send("⚠️ Unsupported time type")
+            
+            # allow 60 seconds for the user to reply, after 60 seconds an error is raised and the user is informed
+            confirm_msg = await ctx.send(f"Create poll '{text}' with a wait time of {waitTime} {timeType}? (y/n)")
+            user_msg = await self.client.wait_for('message', timeout=60, check=check)
             
             if user_msg.content.lower() == "y":
                 
@@ -98,7 +119,7 @@ class Misc(commands.Cog):
                     await message.add_reaction(emoji)
 
                 #wait sepecified time
-                await asyncio.sleep(waitTime*60)
+                await asyncio.sleep(time)
 
                 #count number of reactions on message
                 cache_msg = await ctx.message.channel.fetch_message(message.id)
@@ -135,7 +156,8 @@ class Misc(commands.Cog):
                await ctx.send('Ok!, poll declined')
         
         #if they didn't reply with y or n
-        except:
+        except Exception as e:
+            print(e)
             embed = discord.Embed()
             embed.add_field(name="Poll Error", value=f" Your poll [`{text}`]({ctx.message.jump_url}) in the `{ctx.guild.name}` server timed out or some other error occured\nIn future, to confirm your poll type y or n")
             await ctx.author.send(embed=embed)
