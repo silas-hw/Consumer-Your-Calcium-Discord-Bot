@@ -10,8 +10,6 @@ class Help(commands.Cog):
     @commands.command()
     async def help(self, ctx, command=None):
 
-        helpMessage = ">>> " #>>> is a block quote on discord
-        
         #if a command wasn't passed
         if command == None:
             
