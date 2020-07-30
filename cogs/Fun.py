@@ -9,7 +9,6 @@ class Fun(commands.Cog):
 
     @commands.command(brief="Encrypts english to morse", description="Returns morse code for any sentence given\nCertain special characters may not be supported, such as 'Û'", usage=r"//encrypt hello world!")
     async def encrypt(self, ctx, *, string):
-
         try:
             cipher = mpy.encrypt(string)
             await ctx.send(f"Morse: {cipher}")
@@ -18,7 +17,6 @@ class Fun(commands.Cog):
 
     @commands.command(brief="Decrypts morse to english", description="Returns english for any morse given \n Each morse character should be seperated by a space and each word with /", usage=r"//decrypt .... . .-.. .-.. --- / .-- --- .-. .-.. -..")
     async def decrypt(self, ctx, *, morse):
-
         try:
             decipher = mpy.decrypt(morse)
             await ctx.send(f"English: {decipher}")
