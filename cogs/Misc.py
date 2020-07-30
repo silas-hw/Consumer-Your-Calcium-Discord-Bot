@@ -112,8 +112,8 @@ class Misc(commands.Cog):
                 await user_msg.delete()
 
                 #create message for members to react to
-                pollEmbed = discord.Embed()
-                pollEmbed.add_field(name=f"Poll by {ctx.message.author}", value=text)
+                pollEmbed = discord.Embed(description=f"*{waitTime} {timeType}*")
+                pollEmbed.add_field(name=f"Poll by {ctx.message.author}", value=f"`{text}`")
                 message = await ctx.send(embed=pollEmbed)  
                 for emoji in ['👍', '👎']:
                     await message.add_reaction(emoji)
@@ -156,8 +156,7 @@ class Misc(commands.Cog):
                await ctx.send('Ok!, poll declined')
         
         #if they didn't reply with y or n
-        except Exception as e:
-            print(e)
+        except:
             embed = discord.Embed()
             embed.add_field(name="Poll Error", value=f" Your poll [`{text}`]({ctx.message.jump_url}) in the `{ctx.guild.name}` server timed out or some other error occured\nIn future, to confirm your poll type y or n")
             await ctx.author.send(embed=embed)
