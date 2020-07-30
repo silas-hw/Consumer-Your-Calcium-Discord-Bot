@@ -81,7 +81,7 @@ class Misc(commands.Cog):
 
         try:
 
-            #allow user to chose time type and use minutes as a defualt
+            #allow user to chose time type and use minutes as a default
             if waitTime[-1].isnumeric():
                 time = float(waitTime)*60
                 timeType = "minutes"
@@ -118,7 +118,7 @@ class Misc(commands.Cog):
                 for emoji in ['👍', '👎']:
                     await message.add_reaction(emoji)
 
-                #wait sepecified time
+                #wait specified time
                 await asyncio.sleep(time)
 
                 #count number of reactions on message
