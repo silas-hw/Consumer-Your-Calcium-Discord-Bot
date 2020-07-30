@@ -111,10 +111,7 @@ class Levels(commands.Cog):
     @tasks.loop(seconds=7200)
     async def sqlreconnect(self):
         
-        #create sql connection
         db.reconnect(attempts=10, delay=0)
-
-        #update dbcursor
         self.dbcursor = db.cursor(buffered=True)
 
         print('\n Levels cog reconnected to MySql server\n')
