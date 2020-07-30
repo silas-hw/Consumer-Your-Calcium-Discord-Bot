@@ -45,7 +45,7 @@ class Help(commands.Cog):
                 return
     
     #give link to changelog
-    @commands.command(aliases=['log'], brief="Provides link to the change log", description="Gives a link to the changelog,\n where all notable and unreleased changes will be documented")
+    @commands.command(aliases=['log', 'change', 'changes'], brief="Provides link to the change log", description="Gives a link to the changelog,\n where all notable and unreleased changes will be documented")
     async def changelog(self, ctx):
         await ctx.send('https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/blob/master/CHANGELOG.md')
         
