@@ -13,7 +13,7 @@ class Misc(commands.Cog):
         self.afkUsers = {}
 
     #allows a user to set them self as afk
-    @commands.command(brief="Set yourself as afk", description="set yourself as afk so if others mention you they are told", usage=r"//afk foo bar")
+    @commands.command(brief="Set yourself as afk", description="set yourself as afk so if others mention you they are told", usage=r"//afk haha brrrr")
     async def afk(self, ctx, *, userMessage=" "):
 
         #if user is already afk, remove them from the afk dict, if not add them to it
