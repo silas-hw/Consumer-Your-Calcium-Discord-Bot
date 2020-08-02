@@ -158,7 +158,7 @@ class Misc(commands.Cog):
         #if they didn't reply with y or n
         except:
             embed = discord.Embed()
-            embed.add_field(name="Poll Error", value=f" Your poll [`{text}`]({ctx.message.jump_url}) in the `{ctx.guild.name}` server timed out or some other error occured\nIn future, to confirm your poll type y or n")
+            embed.add_field(name="Poll Error", value=f"Your poll [`{text}`]({ctx.message.jump_url}) in the `{ctx.guild.name}` server timed out or some other error occured\nIn future, to confirm your poll type y or n")
             await ctx.author.send(embed=embed)
 
     #gives information of given user
