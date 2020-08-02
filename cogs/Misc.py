@@ -82,21 +82,21 @@ class Misc(commands.Cog):
         try:
 
             #allow user to chose time type and use minutes as a default
+            timeType = "minute(s)"
+            time = 0
             if waitTime[-1].isnumeric():
                 time = float(waitTime)*60
-                timeType = "minutes"
             elif waitTime[-1].lower() == "m":
                 waitTime = waitTime[:-1]
                 time = float(waitTime)*60
-                timeType = "minutes"
             elif waitTime[-1].lower() == "h":
                 waitTime = waitTime[:-1]
                 time = float(waitTime)*3600
-                timeType = "hours"
+                timeType = "hour(s)"
             elif waitTime[-1].lower() == "d":
                 waitTime = waitTime[:-1]
                 time = float(waitTime)*86400
-                timeType = "days"
+                timeType = "day(s)"
             else:
                 await ctx.send("⚠️ Unsupported time type")
             
