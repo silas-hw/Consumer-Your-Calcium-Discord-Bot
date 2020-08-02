@@ -117,6 +117,7 @@ class Misc(commands.Cog):
                 message = await ctx.send(embed=pollEmbed)  
                 for emoji in ['👍', '👎']:
                     await message.add_reaction(emoji)
+                await message.pin()
 
                 #wait specified time
                 await asyncio.sleep(time)
