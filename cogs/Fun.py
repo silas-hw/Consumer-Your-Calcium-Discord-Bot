@@ -1,4 +1,5 @@
 from morsepy import Morsepy as mpy
+import random
 import discord
 from discord.ext import commands
 
@@ -22,6 +23,29 @@ class Fun(commands.Cog):
             await ctx.send(f"English: {decipher}")
         except:
             await ctx.send("Invalid morse character or incorrect formatting - for more info type `//help decrypt`")
+
+    @commands.command(brief="Flip a coin", description="Flip a coin with a random outcome of either heads or tails")
+    async def flip(self, ctx):
+        result = random.choice['heads', 'tails']
+        await ctx.send(f"{ctx.message.author.mention} {result}")
+
+    @commands.command()
+    async def slots(self, ctx):
+        emojis = ['<:1_:739605377418526830>', '<:1_:739605377418526830>', '<:1_:739605377418526830>', '<:1_:739605377418526830>',
+                  '<:2_:739605426664112169>',
+                  '<:3_:739605480451604601>', '<:3_:739605480451604601>', '<:3_:739605480451604601>']
+
+        scores = {'<:1_:739605377418526830>': 5,
+                  '<:2_:739605426664112169>': 10,
+                  '<:3_:739605480451604601>': 20}
+        score = 0
+        message = f"{random.choice(emojis)} "*3
+        for emoji in message.split():
+            score += scores[emoji]
+        message += f"\nscore - {score}"
+
+        await ctx.send(message)
+
 
 def setup(client):
     client.add_cog(Fun(client))
