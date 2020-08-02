@@ -2,7 +2,7 @@ class TicTacToe():
 
     def __init__(self):
 
-        self.rules = "The game follows a grid of:\n1 2 3\n4 5 6\n7 8 9\nTo pick a position type it's relative number"
+        self.rules = "The game follows a grid of:\n1 2 3\n4 5 6\n7 8 9\nTo pick a position type its relative number"
         self.board = ['-','-','-',
                       '-','-','-',
                       '-','-','-']
@@ -18,12 +18,9 @@ class TicTacToe():
             raise ValueError("Position given is invalid")
 
     def display(self):
-        
         board=self.board
         output = f'{board[0]}  {board[1]}  {board[2]}\n'
-        #output += '-+-+-\n'
         output += f'{board[3]}  {board[4]}  {board[5]}\n'
-        #output += '-+-+-\n'
         output += f'{board[6]}  {board[7]}  {board[8]}\n'
 
         return output
@@ -45,7 +42,6 @@ class TicTacToe():
         ]
 
         for position in win_positions:
-
             if position == [player, player, player]:
                 return True
 
