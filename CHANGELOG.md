@@ -12,8 +12,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed  
 
-* Polls are now autopinned  
-* Slots command  
+>* Polls are now autopinned  
+>* Slots command  
   
 ## [0.6.2](https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/tree/v0.6.2) 2020-31-07  
 
