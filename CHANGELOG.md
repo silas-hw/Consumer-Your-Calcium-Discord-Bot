@@ -8,8 +8,9 @@ All notable changes to this project will be documented in this file.
 
 >* Tic Tac Toe command to play against friends  
 >* Coin flip command  
->* GPL 3.0 license  
 >* Slots command  
+>* Dice roll command
+>* GPL 3.0 license  
 
 ### Changed  
 
