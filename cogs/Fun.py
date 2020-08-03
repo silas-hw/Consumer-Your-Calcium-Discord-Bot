@@ -28,15 +28,23 @@ class Fun(commands.Cog):
     async def flip(self, ctx):
         await ctx.send(f"{ctx.message.author.mention} {random.choice(['heads', 'tails'])}")
 
+    @commands.command(brief="Roll a dice", description="Roll a dice with any number of sides")
+    async def roll(self, ctx, type="d6"):
+        try:
+            range = int(type[1:])
+            await ctx.send(f"{ctx.message.author.mention} 🎲{random.randint(1, range)}")
+        except ValueError:
+            await ctx.send("Invalid dice type. To give a type use d[number of sides] *(e.g d8)*")
+
     @commands.command()
     async def slots(self, ctx):
-        emojis = ['<:1_:739605377418526830>', '<:1_:739605377418526830>', '<:1_:739605377418526830>', '<:1_:739605377418526830>',
-                  '<:2_:739605426664112169>',
-                  '<:3_:739605480451604601>', '<:3_:739605480451604601>', '<:3_:739605480451604601>']
+        emojis = ['<:max:719639562678173769>', '<:max:719639562678173769>', '<:max:719639562678173769>', '<:max:719639562678173769>',
+                  '<:curvearm:719639190836346973>',
+                  '<:silas:719639912147845261>', '<:silas:719639912147845261>', '<:silas:719639912147845261>']
 
-        scores = {'<:1_:739605377418526830>': 5,
-                  '<:2_:739605426664112169>': 10,
-                  '<:3_:739605480451604601>': 20}
+        scores = {'<:max:719639562678173769>': 5,
+                  '<:silas:719639912147845261>': 10,
+                  '<:curvearm:719639190836346973>': 20}
         score = 0
 
         result = [random.choice(emojis) for _ in range(3)]
