@@ -26,8 +26,7 @@ class Fun(commands.Cog):
 
     @commands.command(brief="Flip a coin", description="Flip a coin with a random outcome of either heads or tails")
     async def flip(self, ctx):
-        result = random.choice['heads', 'tails']
-        await ctx.send(f"{ctx.message.author.mention} {result}")
+        await ctx.send(f"{ctx.message.author.mention} {random.choice(['heads', 'tails'])}")
 
     @commands.command()
     async def slots(self, ctx):
@@ -39,10 +38,12 @@ class Fun(commands.Cog):
                   '<:2_:739605426664112169>': 10,
                   '<:3_:739605480451604601>': 20}
         score = 0
-        message = f"{random.choice(emojis)} "*3
-        for emoji in message.split():
+
+        result = [random.choice(emojis) for _ in range(3)]
+
+        for emoji in result:
             score += scores[emoji]
-        message += f"\nscore - {score}"
+        message = f">{result[0]} {result[1]} {result[2]}<\n`score - {score}`"
 
         await ctx.send(message)
 
