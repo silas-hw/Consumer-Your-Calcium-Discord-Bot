@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased  
 
+## [0.7](https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/tree/v0.7) 2020-03-08  
+
 ### Added  
 
 >* Tic Tac Toe command to play against friends  
