@@ -11,9 +11,10 @@ All notable changes to this project will be documented in this file.
 
 ### Changed  
 
->* General code layout 
+>* General code layout has been improved  
 >* Moved owner commands from admin cog to new owner cog 
->* Mute command to be server specific  
+>* Mute command is now server specific  
+>* Info command now gives more information   
 
 ## [0.7.1](https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/tree/v0.7.1) 2020-03-08 
 
