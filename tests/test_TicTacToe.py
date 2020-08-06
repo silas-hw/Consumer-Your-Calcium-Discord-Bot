@@ -18,6 +18,18 @@ def test_checkWin(game):
     with pytest.raises(ValueError):
         game.checkWin('P')
 
+def test_checkDraw(game):
+    
+    assert game.checkDraw() == False
+
+    for position in [1, 2, 6, 7, 8]:
+        game.playerMove('X', position)
+    
+    for position in [3, 4, 5, 9]:
+        game.playerMove('O', position)
+
+    assert game.checkDraw() == True
+
 def test_playerMove(game):
 
     assert game.board[0] == '-'
