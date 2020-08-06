@@ -1,4 +1,5 @@
 #modules
+import logging
 import asyncio
 import mysql.connector
 import json
@@ -114,7 +115,7 @@ class Levels(commands.Cog):
         db.reconnect(attempts=10, delay=0)
         self.dbcursor = db.cursor(buffered=True)
 
-        print('\n Levels cog reconnected to MySql server\n')
+        logging.info('Levels cog reconnected to MySql server')
 
 def setup(client):
     client.add_cog(Levels(client))
