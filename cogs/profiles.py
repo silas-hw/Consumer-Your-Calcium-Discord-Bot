@@ -1,4 +1,5 @@
 #modules
+import logging
 import asyncio
 import mysql.connector
 import json
@@ -69,7 +70,7 @@ class Profiles(commands.Cog):
         #update dbcursor
         self.dbcursor = db.cursor(buffered=True)
 
-        print('\n Profiles cog reconnected to MySql server\n')
+        logging.info('Profiles cog reconnected to MySql server')
 
 def setup(client):
     client.add_cog(Profiles(client))
