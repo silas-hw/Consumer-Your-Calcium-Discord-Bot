@@ -1,3 +1,4 @@
+import logging
 import discord
 from discord.ext import commands
 class Admin(commands.Cog):
@@ -12,12 +13,12 @@ class Admin(commands.Cog):
         if member in self.mutedMembers[str(ctx.guild.id)]:
             self.mutedMembers[ctx.guild.id].remove(member)
 
-            print(f"\n{ctx.message.author} unmuted {member}")
+            logging.info(f"\n{ctx.message.author} unmuted {member}")
             await ctx.send(f"<:speaker:727914839615471687> {member} is no longer muted")
         else:
             self.mutedMembers[str(ctx.guild.id)].append(member)
 
-            print(f"\n{ctx.message.author} muted {member}")
+            logging.info(f"\n{ctx.message.author} muted {member}")
             await ctx.send(f"<:mute:727914643879886929> {member} is now muted")
 
     @commands.command()
