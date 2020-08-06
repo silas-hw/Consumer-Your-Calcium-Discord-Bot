@@ -66,24 +66,6 @@ async def changeprefix(ctx, prefix):
     await ctx.send(f"Prefix changed to '{prefix}'!")
 
 #cog loading and reloading
-
-#used to reload cogs
-@client.command()
-@check_owner()
-async def reload(ctx, extension):
-    client.unload_extension(f"cogs.{extension}")
-    client.load_extension(f"cogs.{extension}")
-
-    print(f"{extension} reloaded by {ctx.message.author}")
-
-#used to load cogs
-@client.command()
-@check_owner()
-async def load(ctx, extension):
-    client.load_extension(f"cogs.{extension}")
-
-    print(f"{extension} loaded by {ctx.message.author}")
-
 print('loading cogs: ')
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
