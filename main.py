@@ -4,10 +4,10 @@ import os
 import discord
 from discord.ext import commands, tasks
 
+#set token
 with open('tokens.json', 'r') as tokenfile:
     tokens = json.load(tokenfile)
-    TOKEN = tokens['main']
-
+    TOKEN = tokens['test']
 
 #check to allow some commands to only be accessed by owner
 def check_owner():
@@ -27,46 +27,38 @@ client.remove_command('help')
 
 @client.event
 async def on_ready():
-
     print('\nbot online\n')
-
 
 @client.event
 async def on_guild_join(guild):
+    #creates default prefix for servers'''
+
+    with open("prefixes.json", "r") as f:
+        prefixes = json.load(f)
+    prefixes[str(guild.id)] = "//"
+    with open("prefixes.json", "w") as f:
+        json.dump(prefixes, f, indent=4)
 
     print(f"\nbot added to {guild}")
 
-    #creates default prefix for servers
-    with open("prefixes.json", "r") as f:
-        prefixes = json.load(f)
-
-    prefixes[str(guild.id)] = "//"
-
-    with open("prefixes.json", "w") as f:
-        json.dump(prefixes, f, indent=4)
-
 @client.event
 async def on_guild_remove(guild):
+    #removes server from prefixes json file when they remove the bot'''
+
+    with open("prefixes.json", "r") as f:
+        prefixes = json.load(f)
+    prefixes.pop(str(guild.id))
+    with open("prefixes.json", "w") as f:
+        json.dump(prefixes, f, indent=4)
 
     print(f"\nbot removed from {guild}")
 
-    #removes server from prefixes json file when they remove the bot
-    with open("prefixes.json", "r") as f:
-        prefixes = json.load(f)
-
-    prefixes.pop(str(guild.id))
-
-    with open("prefixes.json", "w") as f:
-        json.dump(prefixes, f, indent=4)
-
-#command for server to set custom id
+#allows users to changeprefix
 @client.command(aliases=["prefix", "cp"])
 async def changeprefix(ctx, prefix):
     with open("prefixes.json", "r") as f:
         prefixes = json.load(f)
-
     prefixes[str(ctx.guild.id)] = prefix
-
     with open("prefixes.json", "w") as f:
         json.dump(prefixes, f, indent=4)
 
