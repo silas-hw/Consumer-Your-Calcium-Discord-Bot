@@ -47,6 +47,11 @@ class TicTacToe():
 
         return False
 
+    def checkDraw(self):
+        if '-' not in self.board:
+            return True
+        return False
+    
     def playerMove(self, player, position: int):
 
         self._check_player(player)
