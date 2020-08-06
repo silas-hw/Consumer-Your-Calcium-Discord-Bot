@@ -13,7 +13,6 @@ class Games(commands.Cog):
     @commands.command(aliases=['ttt'], brief="Tic tac toe", description="Play a game of tic tac toe", usage=r"//ttt <player2>")
     async def tic_tac_toe(self, ctx, player2: discord.Member):
 
-        
         def _confirm_reply(m):
             return m.channel == ctx.message.channel and m.author == player2 and m.content.lower() in ['y', 'n']
         await ctx.send(f"{player2.mention} play a game of tic tac toe with {ctx.message.author}?")
@@ -57,10 +56,6 @@ class Games(commands.Cog):
             if game.checkWin(player):
                 await ctx.send(f"{players[player].mention} won!")
                 break
-
-            
-
-
 
 def setup(client):
     client.add_cog(Games(client))
