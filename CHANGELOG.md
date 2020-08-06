@@ -4,11 +4,21 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased  
 
+### Added 
+
+>* New owner commands  
+>* New admin commands  
+
+### Changed  
+
+>* General code layout 
+>* Moved owner commands from admin cog to new owner cog 
+
 ## [0.7.1](https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/tree/v0.7.1) 2020-03-08 
 
 ### Changed  
 
-* Poll command to have clean content (mentions are shown as plain text)  
+>* Poll command to have clean content (mentions are shown as plain text)  
 
 ## [0.7](https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/tree/v0.7) 2020-03-08  
 
