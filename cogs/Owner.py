@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class Owner(command.Cog):
+class Owner(commands.Cog):
 
     def __init__(self, client):
         self.client = client
@@ -13,18 +13,21 @@ class Owner(command.Cog):
         return commands.check(predicate)
 
     #used to reload cogs
-    @client.command()
-    @check_owner()
-    async def reload(ctx, extension):
-        client.unload_extension(f"cogs.{extension}")
-        client.load_extension(f"cogs.{extension}")
+    @commands.command()
+    @_check_owner()
+    async def reload(self, ctx, extension):
+        self.client.unload_extension(f"cogs.{extension}")
+        self.client.load_extension(f"cogs.{extension}")
 
         print(f"{extension} reloaded by {ctx.message.author}")
 
     #used to load cogs
-    @client.command()
-    @check_owner()
-    async def load(ctx, extension):
-        client.load_extension(f"cogs.{extension}")
+    @commands.command()
+    @_check_owner()
+    async def load(self, ctx, extension):
+        self.client.load_extension(f"cogs.{extension}")
 
         print(f"{extension} loaded by {ctx.message.author}")
+
+def setup(client):
+    client.add_cog(Owner(client))
