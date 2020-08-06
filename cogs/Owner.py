@@ -1,3 +1,4 @@
+import logging
 import discord
 from discord.ext import commands
 
@@ -18,7 +19,7 @@ class Owner(commands.Cog):
         self.client.unload_extension(f"cogs.{extension}")
         self.client.load_extension(f"cogs.{extension}")
 
-        print(f"{extension} reloaded by {ctx.message.author}")
+        logging.info(f"{extension} reloaded by {ctx.message.author}")
 
     #used to load cogs
     @commands.command()
@@ -26,7 +27,17 @@ class Owner(commands.Cog):
     async def load(self, ctx, extension):
         self.client.load_extension(f"cogs.{extension}")
 
-        print(f"{extension} loaded by {ctx.message.author}")
+        logging.info(f"{extension} loaded by {ctx.message.author}")
+
+    #returns logs
+    @commands.command()
+    @_check_owner()
+    async def logs(self, ctx):
+        logs=''
+        with open('log.log', 'r') as f:
+            for line in (f.readlines() [-5:]):
+                logs += f'{line}'
+        await ctx.send(f'```css\n{logs}```')
 
     @commands.command(aliases=["announce"], brief="Makes an announcement", description="mention everyone with an announcement sent by the bot", usage=r"//announcement test announcement")
     @_check_owner()
