@@ -41,22 +41,35 @@ class Misc(commands.Cog):
     #gives information of given user
     @commands.command(aliases=["info", "i"], brief="get details of any member", description="get the nickname, date joined, top role and current status of any member", usage=r"//info @CleanlyWolf#5407")
     async def information(self, ctx, member: discord.Member):
-
+        
         message = ""
-        message += f"Nickname: {member.display_name}\n"
-        message += f"Joined server at: {member.joined_at}\n"
-        message += f"Top role: {member.top_role}\n"
-        message += f"Status: {member.status}\n"
+        message += f"**Bot account**: {member.bot}\n"
+        message += f"**Nickname**: {member.display_name}\n"
+        message += f"**Account created at** *(utc)*: {member.created_at}\n"
+        message += f"**Joined server at** *(utc)*: {member.joined_at}\n"
+        message += f"**Top role**: {member.top_role}\n"
+        message += f"**Premium since** *(utc)*: {member.premium_since}" if member.premium_since != None else '**Premium**: none\n'
+        message += f"**Status**: {member.status}\n"
+
+        #hypesquad
+        if member.public_flags.hypesquad_bravery:
+            message += f"**Hypesquad**: bravery\n"
+        if member.public_flags.hypesquad_brilliance:
+            message += f"**Hypesquad**: brilliance\n"
+        if member.public_flags.hypesquad_balance:
+            message += f"**Hypesquad**: balance\n"
         try:
-            message += f"Current activity: {member.activities[0]}\n"
+            message += f"**Current activity**: {member.activities[0].name}\n"
         except:
             pass
+        message += "**Current platform**: mobile" if member.is_on_mobile() else "**Current platform**: desktop\n"
 
         embed = discord.Embed(
-            title = str(member.name),
+            title = str(member),
             description = message
         )
         
+        embed.set_footer(text=f"id: {member.id}")
         embed.set_image(url=member.avatar_url)
         await ctx.send(embed=embed)
 
