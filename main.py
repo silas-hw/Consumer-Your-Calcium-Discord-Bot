@@ -9,12 +9,6 @@ with open('tokens.json', 'r') as tokenfile:
     tokens = json.load(tokenfile)
     TOKEN = tokens['test']
 
-#check to allow some commands to only be accessed by owner
-def check_owner():
-    def predicate(ctx):
-        return ctx.message.author.id == 385126151342915588
-    return commands.check(predicate)
-
 #custom prefixes
 def get_prefix(client, message):
     with open("prefixes.json", "r") as f:
