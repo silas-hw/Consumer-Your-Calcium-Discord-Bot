@@ -56,6 +56,9 @@ class Games(commands.Cog):
             if game.checkWin(player):
                 await ctx.send(f"{players[player].mention} won!")
                 break
+            if game.checkDraw():
+                await ctx.send(f"{players['X'].mention} {players['O'].mention} Draw!")
+                break
 
 def setup(client):
     client.add_cog(Games(client))
