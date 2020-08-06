@@ -1,8 +1,11 @@
 #modules
+import logging
 import json
 import os
 import discord
 from discord.ext import commands, tasks
+
+logging.basicConfig(level=logging.INFO)
 
 #set token
 with open('tokens.json', 'r') as tokenfile:
@@ -60,10 +63,10 @@ async def changeprefix(ctx, prefix):
     await ctx.send(f"Prefix changed to '{prefix}'!")
 
 #cog loading and reloading
-print('loading cogs: ')
+logging.info('Loading cogs: ')
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
-        print(filename)
+        logging.info(f"\tCog~ {filename}")
         client.load_extension(f"cogs.{filename[:-3]}")
 
 client.run(TOKEN) #when going from testing branches to the main branch remember to change to the main bot token      
