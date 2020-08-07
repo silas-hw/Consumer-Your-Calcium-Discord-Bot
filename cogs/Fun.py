@@ -3,6 +3,8 @@ import random
 import discord
 from discord.ext import commands
 
+logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
+
 class Fun(commands.Cog):
 
     def __init__(self, client):

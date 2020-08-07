@@ -6,6 +6,8 @@ import json
 import discord
 from discord.ext import commands, tasks
 
+logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
+
 with open("sqlpasswords.json", "r") as f:
     passwords = json.load(f)
 

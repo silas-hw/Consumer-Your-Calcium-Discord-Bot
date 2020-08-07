@@ -6,6 +6,8 @@ from datetime import datetime
 import discord
 from discord.ext import commands, tasks
 
+logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
+
 class Useful(commands.Cog):
     
     def __init__(self, client):
@@ -13,37 +15,83 @@ class Useful(commands.Cog):
 
     #mentions a role or member after a given amount of time has passed
     @commands.command(brief="Reminds members or roles", description="mentions role/user after given time has passed\nWhen using 24 hr time it is only possible to set a reminder within the same day,\n a possible way of getting around this is setting a reminder in minutes", usage=r"//reminder @CleanlyWolf#5407 14:00 reeeeeee")
-    async def reminder(self, ctx, users, timeStr = "5", *, message="reminder"):
+    async def reminder(self, ctx, users, waitTime, *, message="reminder"):
         
         try:
             #if in 24 hour time format
-            if re.search(r"\d\d:\d\d", timeStr): #checks formatting of time given
+            #if re.search(r"\d\d:\d\d", timeStr): #checks formatting of time given
                 
-                givenHourStr, givenMinuteStr = timeStr.split(":") #the numbers seperated by the : are assigned to two variables
+                #givenHourStr, givenMinuteStr = timeStr.split(":") #the numbers seperated by the : are assigned to two variables
                 
                 #sets the hour and minute of when the command was sent
-                tz = pytz.timezone('Europe/London') #sets timezone to be used to get current hour and minute
-                currentHour = datetime.now(tz).hour
-                currentMinute = datetime.now(tz).minute
+                #tz = pytz.timezone('Europe/London') #sets timezone to be used to get current hour and minute
+                #currentHour = datetime.now(tz).hour
+                #currentMinute = datetime.now(tz).minute
 
                 #calculates the amount time that needs to pass in seconds
-                hour, minute = int(givenHourStr) - currentHour, int(givenMinuteStr) - currentMinute
-                time = hour*60**2 + minute*60
+                #hour, minute = int(givenHourStr) - currentHour, int(givenMinuteStr) - currentMinute
+                #time = hour*60**2 + minute*60
 
-                await ctx.send(f"<:bell:727914124230787104> Reminder set for {timeStr} with message '{message}'")
+                #await ctx.send(f"<:bell:727914124230787104> Reminder set for {timeStr} with message '{message}'")
 
             #if time is given in minutes
-            else:
+            #else:
 
                 #calculates amount of time that needs to pass in seconds
-                time = int(timeStr)*60
-                await ctx.send(f"<:bell:727914124230787104> Reminder set for {timeStr} minutes with message '{message}'")
+                #time = int(timeStr)*60
+                #await ctx.send(f"<:bell:727914124230787104> Reminder set for {timeStr} minutes with message '{message}'")
+
+            #allow user to chose time type and use minutes as a default
+            timeType = "minute(s)"
+            time = 0
+            if waitTime[-1].isnumeric():
+                time = float(waitTime)*60
+            elif waitTime[-1].lower() == "m":
+                waitTime = waitTime[:-1]
+                time = float(waitTime)*60
+            elif waitTime[-1].lower() == "h":
+                waitTime = waitTime[:-1]
+                time = float(waitTime)*3600
+                timeType = "hour(s)"
+            elif waitTime[-1].lower() == "d":
+                waitTime = waitTime[:-1]
+                time = float(waitTime)*86400
+                timeType = "day(s)"
+            else:
+                await ctx.send("⚠️ Unsupported time type")
+                return 
             
+            await ctx.send(f"<:bell:727914124230787104> Reminder set for {waitTime} {timeType} with message '{message}'")
             await asyncio.sleep(time)
             await ctx.send(f"<:bell:727914124230787104> {users} {message} *(reminder set by {ctx.message.author})*")
         except:
             
             await ctx.send("Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!")
+
+    @commands.command(brief="set a reminder for yourself", description="Recieve a dm reminding you to do something after a given period of time", usage=r"//remindme <time> <message>")
+    async def remindme(self, ctx, waitTime, message):
+        timeType = "minute(s)"
+        time = 0
+        if waitTime[-1].isnumeric():
+            time = float(waitTime)*60
+        elif waitTime[-1].lower() == "m":
+            waitTime = waitTime[:-1]
+            time = float(waitTime)*60
+        elif waitTime[-1].lower() == "h":
+            waitTime = waitTime[:-1]
+            time = float(waitTime)*3600
+            timeType = "hour(s)"
+        elif waitTime[-1].lower() == "d":
+            waitTime = waitTime[:-1]
+            time = float(waitTime)*86400
+            timeType = "day(s)"
+        else:
+            await ctx.send("⚠️ Unsupported time type")
+            return 
+        
+        await ctx.send(f"<:bell:727914124230787104> Reminder set for {waitTime} {timeType} with message '{message}'")
+        await asyncio.sleep(time)
+        await ctx.message.author.send(f"`Reminder: {message}`")
 
     @commands.command(brief="Make a poll and have the results given after a certain amount of time", description="Make a poll that can people can vote yes or no to\nYou give the time in minutes the poll should remain active followed by what the poll is about", usage=r"//poll 5 Haha brrrrr?")
     async def poll(self, ctx, waitTime: str, *, text: commands.clean_content):

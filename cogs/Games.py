@@ -4,6 +4,7 @@ from discord.ext import commands
 #games
 from games import TicTacToe
 
+logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
 
 class Games(commands.Cog):
 

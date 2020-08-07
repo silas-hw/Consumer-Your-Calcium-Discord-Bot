@@ -6,6 +6,8 @@ from datetime import datetime
 import discord
 from discord.ext import commands, tasks
 
+logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
+
 class Misc(commands.Cog):
 
     def __init__(self, client):
