@@ -5,7 +5,8 @@ import os
 import discord
 from discord.ext import commands, tasks
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
+logging.info('New main run\n\n')
 
 #set token
 with open('tokens.json', 'r') as tokenfile:
@@ -24,7 +25,7 @@ client.remove_command('help')
 
 @client.event
 async def on_ready():
-    print('\nbot online\n')
+    logging.info('bot online')
 
 @client.event
 async def on_guild_join(guild):
@@ -36,7 +37,7 @@ async def on_guild_join(guild):
     with open("prefixes.json", "w") as f:
         json.dump(prefixes, f, indent=4)
 
-    print(f"\nbot added to {guild}")
+    logging.info(f"bot added to {guild}")
 
 @client.event
 async def on_guild_remove(guild):
@@ -48,7 +49,7 @@ async def on_guild_remove(guild):
     with open("prefixes.json", "w") as f:
         json.dump(prefixes, f, indent=4)
 
-    print(f"\nbot removed from {guild}")
+    logging.info(f"bot removed from {guild}")
 
 #allows users to changeprefix
 @client.command(aliases=["prefix", "cp"])
@@ -59,7 +60,7 @@ async def changeprefix(ctx, prefix):
     with open("prefixes.json", "w") as f:
         json.dump(prefixes, f, indent=4)
 
-    print(f"\n{ctx.message.author} changed prefix in {ctx.guild} to {prefix}")
+    logging.info(f"{ctx.message.author} changed prefix in {ctx.guild} to {prefix}")
     await ctx.send(f"Prefix changed to '{prefix}'!")
 
 #cog loading and reloading
