@@ -1,4 +1,5 @@
 #modules
+import logging
 import discord
 from discord.ext import commands
 

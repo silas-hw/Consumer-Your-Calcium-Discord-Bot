@@ -1,6 +1,7 @@
 from morsepy import Morsepy as mpy
 import random
 import discord
+import logging
 from discord.ext import commands
 
 logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
