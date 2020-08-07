@@ -20,12 +20,6 @@ Reacting to messages with emojis can be a long and boring process
 an use example would be `//react epic`, which reacts with letter emojis to spell epic  
   
 The bot will react to the previous message sent  
-  
-### Profiles and website leaderboard  
-
-The bot's levelling system connects to a [website](silashw.heliohost.org)  to display a leaderboard  
-  
-This website also has profiles, which the `//image`, `//pin` and `//twitter` commands relate to  
 
 ## Built with  
   
