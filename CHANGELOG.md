@@ -4,21 +4,24 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased  
 
-### Added 
+### Added  
 
 >* New owner commands  
 >* New admin commands  
+>* New remindme command to set reminders to be sent to yourself in dm's  
+>* Reminder command takes time in the same way as the poll command *(1d=1 day, 1m=1 minute, etc...)*  
 
 ### Changed  
 
 >* General code layout has been improved  
->* Moved owner commands from admin cog to new owner cog 
+>* Moved owner commands from admin cog to new owner cog  
 >* Mute command is now server specific  
+>* Mute command has been updated to work as intended  
 >* Info command now gives more information  
 >* Tic Tac Toe draws are now handled properly  
+>* Fixed a few small bugs  
 
-
-## [0.7.1](https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/tree/v0.7.1) 2020-03-08 
+## [0.7.1](https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/tree/v0.7.1) 2020-03-08  
 
 ### Changed  
 
