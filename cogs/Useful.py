@@ -72,6 +72,7 @@ class Useful(commands.Cog):
                 timeType = "day(s)"
             else:
                 await ctx.send("⚠️ Unsupported time type")
+                return 
             
             # allow 60 seconds for the user to reply, after 60 seconds an error is raised and the user is informed
             confirm_msg = await ctx.send(f"Create poll '{text}' with a wait time of {waitTime} {timeType}? (y/n)")
