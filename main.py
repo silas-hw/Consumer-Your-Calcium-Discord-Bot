@@ -11,7 +11,7 @@ logging.info('New main run\n\n')
 #set token
 with open('tokens.json', 'r') as tokenfile:
     tokens = json.load(tokenfile)
-    TOKEN = tokens['test']
+    TOKEN = tokens['main']
 
 #custom prefixes
 def get_prefix(client, message):
@@ -38,6 +38,13 @@ async def on_guild_join(guild):
         json.dump(prefixes, f, indent=4)
 
     logging.info(f"bot added to {guild}")
+
+    with open('muted_members.json', 'r') as f:
+        muted = json.load(f)
+    muted[str(guild.id)] = []
+    with open('muted_members.json', 'r') as f:
+        json.dump(muted, f, indent=4)
+
 
 @client.event
 async def on_guild_remove(guild):
