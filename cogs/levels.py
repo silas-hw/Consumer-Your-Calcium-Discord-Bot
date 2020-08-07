@@ -6,6 +6,9 @@ import json
 import discord
 from discord.ext import commands, tasks
 
+#checks
+from checks import Muted
+
 logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
 
 with open("sqlpasswords.json", "r") as f:
@@ -66,12 +69,12 @@ class Levels(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-
         await self.update_levels(member)
 
     @commands.Cog.listener()
+    @Muted.check()
     async def on_message(self, message):
-        if not message.author.bot and str(self.client.command_prefix) not in str(message.content): #if member sending message isn't a bot account
+        if not message.author.bot and Muted.not_muted(message.guild.id, message.author.id): #if member sending message isn't a bot account
 
             await asyncio.sleep(2) #wait a minute to avoid sql error
             
@@ -80,6 +83,7 @@ class Levels(commands.Cog):
             await self.level_up(message.author, message.channel)
 
     @commands.command(brief="Displays information about your level", description="Displays level and xp information alonside a nifty progress bar", usage=r"//level")
+    @Muted.check()
     async def level(self, ctx):
         
         self.dbcursor.execute(f"SELECT xp, level FROM members WHERE memberid = {ctx.message.author.id}")

@@ -3,6 +3,9 @@ import logging
 import discord
 from discord.ext import commands
 
+#checks
+from checks import Muted
+
 logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
 class Help(commands.Cog):
 
@@ -10,6 +13,7 @@ class Help(commands.Cog):
         self.client = client
 
     @commands.command()
+    @Muted.check()
     async def help(self, ctx, command=None):
 
         #if a command wasn't passed
@@ -46,6 +50,7 @@ class Help(commands.Cog):
     
     #give link to changelog
     @commands.command(aliases=['log', 'change', 'changes'], brief="Provides link to the change log", description="Gives a link to the changelog,\n where all notable and unreleased changes will be documented")
+    @Muted.check()
     async def changelog(self, ctx):
         await ctx.send('https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/blob/master/CHANGELOG.md')
         

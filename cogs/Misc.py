@@ -7,6 +7,9 @@ from datetime import datetime
 import discord
 from discord.ext import commands, tasks
 
+#checks
+from checks import Muted
+
 logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
 
 class Misc(commands.Cog):
@@ -17,6 +20,7 @@ class Misc(commands.Cog):
 
     #allows a user to set them self as afk
     @commands.command(brief="Set yourself as afk", description="set yourself as afk so if others mention you they are told", usage=r"//afk haha brrrr")
+    @Muted.check()
     async def afk(self, ctx, *, userMessage=" "):
 
         #if user is already afk, remove them from the afk dict, if not add them to it
@@ -43,6 +47,7 @@ class Misc(commands.Cog):
     
     #gives information of given user
     @commands.command(aliases=["info", "i"], brief="get details of any member", description="get the nickname, date joined, top role and current status of any member", usage=r"//info @CleanlyWolf#5407")
+    @Muted.check()
     async def information(self, ctx, member: discord.Member):
         
         message = ""
@@ -78,6 +83,7 @@ class Misc(commands.Cog):
 
     #gives them the role mentioned for announcements
     @commands.command(aliases=['ping'], brief="get pinged for announcements", description="give you the *consumer* role, which is pinged for announcements and updates")
+    @Muted.check()
     async def pingme(self, ctx):
 
         role = ctx.guild.get_role(732354594536947803)
@@ -86,6 +92,7 @@ class Misc(commands.Cog):
 
     #react to the message before the command with a given set of emojis
     @commands.command(aliases=['r'], brief="reacts to messages", description="Reacts to the previous message sent\nThe message used to invoke the command is deleted", usage=r"//react epic")
+    @Muted.check()
     async def react(self, ctx, reaction='epic'):
 
         await ctx.message.delete()

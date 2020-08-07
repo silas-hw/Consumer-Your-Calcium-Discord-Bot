@@ -4,6 +4,9 @@ import discord
 import logging
 from discord.ext import commands
 
+#checks
+from checks import Muted
+
 logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
 
 class Fun(commands.Cog):
@@ -12,6 +15,7 @@ class Fun(commands.Cog):
         self.client = client
 
     @commands.command(brief="Encrypts english to morse", description="Returns morse code for any sentence given\nCertain special characters may not be supported, such as 'Û'", usage=r"//encrypt hello world!")
+    @Muted.check()
     async def encrypt(self, ctx, *, string):
         try:
             cipher = mpy.encrypt(string)
@@ -20,6 +24,7 @@ class Fun(commands.Cog):
             await ctx.send("Invalid character! - for more info type `//help decrypt`")
 
     @commands.command(brief="Decrypts morse to english", description="Returns english for any morse given \n Each morse character should be seperated by a space and each word with /", usage=r"//decrypt .... . .-.. .-.. --- / .-- --- .-. .-.. -..")
+    @Muted.check()
     async def decrypt(self, ctx, *, morse):
         try:
             decipher = mpy.decrypt(morse)
@@ -28,10 +33,12 @@ class Fun(commands.Cog):
             await ctx.send("Invalid morse character or incorrect formatting - for more info type `//help decrypt`")
 
     @commands.command(brief="Flip a coin", description="Flip a coin with a random outcome of either heads or tails")
+    @Muted.check()
     async def flip(self, ctx):
         await ctx.send(f"{ctx.message.author.mention} {random.choice(['heads', 'tails'])}")
 
     @commands.command(brief="Roll a dice", description="Roll a dice with any number of sides")
+    @Muted.check()
     async def roll(self, ctx, type="d6"):
         try:
             range = int(type[1:])
@@ -40,6 +47,7 @@ class Fun(commands.Cog):
             await ctx.send("Invalid dice type. To give a type use d[number of sides] *(e.g d8)*")
 
     @commands.command()
+    @Muted.check()
     async def slots(self, ctx):
         emojis = ['<:max:719639562678173769>', '<:max:719639562678173769>', '<:max:719639562678173769>', '<:max:719639562678173769>',
                   '<:curvearm:719639190836346973>',

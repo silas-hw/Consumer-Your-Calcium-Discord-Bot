@@ -5,6 +5,9 @@ from discord.ext import commands
 #games
 from games import TicTacToe
 
+#checks
+from checks import Muted
+
 logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
 
 class Games(commands.Cog):
@@ -13,6 +16,7 @@ class Games(commands.Cog):
         self.client = client
 
     @commands.command(aliases=['ttt'], brief="Tic tac toe", description="Play a game of tic tac toe", usage=r"//ttt <player2>")
+    @Muted.check()
     async def tic_tac_toe(self, ctx, player2: discord.Member):
 
         def _confirm_reply(m):

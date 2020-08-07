@@ -7,6 +7,9 @@ from datetime import datetime
 import discord
 from discord.ext import commands, tasks
 
+#checks
+from checks import Muted
+
 logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
 
 class Useful(commands.Cog):
@@ -16,6 +19,7 @@ class Useful(commands.Cog):
 
     #mentions a role or member after a given amount of time has passed
     @commands.command(brief="Reminds members or roles", description="mentions role/user after given time has passed\nWhen using 24 hr time it is only possible to set a reminder within the same day,\n a possible way of getting around this is setting a reminder in minutes", usage=r"//reminder @CleanlyWolf#5407 14:00 reeeeeee")
+    @Muted.check()
     async def reminder(self, ctx, users, waitTime, *, message="reminder"):
         
         try:
@@ -70,6 +74,7 @@ class Useful(commands.Cog):
             await ctx.send("Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!")
 
     @commands.command(brief="set a reminder for yourself", description="Recieve a dm reminding you to do something after a given period of time", usage=r"//remindme <time> <message>")
+    @Muted.check()
     async def remindme(self, ctx, waitTime, message):
         timeType = "minute(s)"
         time = 0
@@ -95,6 +100,7 @@ class Useful(commands.Cog):
         await ctx.message.author.send(f"`Reminder: {message}`")
 
     @commands.command(brief="Make a poll and have the results given after a certain amount of time", description="Make a poll that can people can vote yes or no to\nYou give the time in minutes the poll should remain active followed by what the poll is about", usage=r"//poll 5 Haha brrrrr?")
+    @Muted.check()
     async def poll(self, ctx, waitTime: str, *, text: commands.clean_content):
         
         #used to check message sent by user

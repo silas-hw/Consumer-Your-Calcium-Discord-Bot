@@ -6,6 +6,9 @@ import json
 import discord
 from discord.ext import commands, tasks
 
+#checks
+from checks import Muted
+
 logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
 
 with open("sqlpasswords.json", "r") as f:
@@ -33,6 +36,7 @@ class Profiles(commands.Cog):
 
     #updates users twitter handle in MySQL database
     @commands.command(brief="Adds your twitter feed to the website", description="Adds your twitter handle to the database so your feed appears \non your profile on [the website](http://silashw.heliohost.org)\nSimply type your twitter handle *(without @)* after the command", usage=r"//twitter silas_hw")
+    @Muted.check()
     async def twitter(self, ctx, handle):
 
         self.dbcursor.execute(f"UPDATE members SET twitter = '{handle}' WHERE memberid = {ctx.message.author.id}" )
@@ -42,6 +46,7 @@ class Profiles(commands.Cog):
 
     #adds pinned message to be shown on membe
     @commands.command(brief="Pin a message!", description="Pins a message to be displayed on your profile on [the website](http://silashw.heliohost.org)\nThe maximum character length is 50", usage=r"//pin UwU")
+    @Muted.check()
     async def pin(self, ctx, *, message):
 
         if len(message) > 50:
@@ -54,6 +59,7 @@ class Profiles(commands.Cog):
 
     #adds pinned image to be displayed on the website
     @commands.command(brief="Add an image to your profile!", description="Adds an image to be displayed on your profile page on [the website](http://silashw.heliohost.org)\n The image *will* be stretched", usage=r"//image <attachement>")
+    @Muted.check()
     async def image(self, ctx):
 
         imageUrl = ctx.message.attachments[0].url
