@@ -5,8 +5,6 @@ from discord.ext import commands
 #checks
 from checks import Owner
 
-logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
-
 class Owner(commands.Cog):
 
     def __init__(self, client):

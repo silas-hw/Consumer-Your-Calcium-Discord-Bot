@@ -8,8 +8,6 @@ from games import TicTacToe
 #checks
 from checks import Muted
 
-logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
-
 class Games(commands.Cog):
 
     def __init__(self, client):

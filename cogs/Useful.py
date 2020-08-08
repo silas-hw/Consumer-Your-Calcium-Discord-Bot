@@ -10,8 +10,6 @@ from discord.ext import commands, tasks
 #checks
 from checks import Muted
 
-logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
-
 class Useful(commands.Cog):
     
     def __init__(self, client):

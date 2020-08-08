@@ -3,8 +3,6 @@ import logging
 import discord
 from discord.ext import commands
 
-logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
-
 class mutedinst():
 
     @property

@@ -6,7 +6,6 @@ from discord.ext import commands
 #checks
 from checks import Muted
 
-logging.basicConfig(level=logging.INFO, filename='log.log', format="[%(asctime)s]%(levelname)s:%(module)s~ %(message)s")
 class Help(commands.Cog):
 
     def __init__(self, client):
