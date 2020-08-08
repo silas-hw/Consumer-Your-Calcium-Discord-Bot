@@ -62,10 +62,8 @@ class Admin(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message(self, message):
-
         if message.author.id in self.mutedinst.members[str(message.guild.id)]:
             await message.delete() #deletes message if user is muted
-
 
 def setup(client):
     client.add_cog(Admin(client))
