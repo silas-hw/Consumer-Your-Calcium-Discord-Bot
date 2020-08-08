@@ -1,5 +1,6 @@
 log.log
 admin.log
+muted_members.json
 tokens.json
 sqlpasswords.json
 __pycache__
