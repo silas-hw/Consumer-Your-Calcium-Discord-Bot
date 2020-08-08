@@ -1,7 +1,19 @@
 import json
 import logging
+from logging import FileHandler
 import discord
 from discord.ext import commands
+
+adminLog = logging.getLogger('Admin-log')
+adminLog.setLevel(logging.INFO)
+
+formatter = logging.Formatter("[%(asctime)s]%(levelname)s~ %(message)s")
+
+fileHandler = logging.FileHandler('admin.log')
+fileHandler.setFormatter(formatter)
+
+adminLog.addHandler(fileHandler)
+
 
 class mutedinst():
 
@@ -43,7 +55,7 @@ class Admin(commands.Cog):
         self.mutedinst.mute(ctx.message.guild.id, member.id)
         await ctx.send(f"<:mute:727914643879886929> {member} is now muted")
 
-        logging.info(f"{ctx.message.author} muted {member}")
+        adminLog.info(f"{ctx.message.author} muted {member}")
 
     @commands.command()
     @commands.has_role('Admin')
@@ -51,7 +63,7 @@ class Admin(commands.Cog):
         self.mutedinst.unmute(ctx.message.guild.id, member.id)
         await ctx.send(f"<:speaker:727914839615471687> {member} is no longer muted")
 
-        logging.info(f"{ctx.message.author} unmuted {member}")
+        adminLog.info(f"{ctx.message.author} unmuted {member}")
         
     @commands.command()
     @commands.has_role('Admin')
@@ -61,6 +73,15 @@ class Admin(commands.Cog):
             message += f"    {ctx.guild.get_member(memberid)}\n"
         message += "```"
         await ctx.send(message)
+
+    @commands.command(aliases=['audit', 'adminlog', 'alogs', 'alog'])
+    @commands.has_role('Admin')
+    async def adminlogs(self, ctx):
+        logs=''
+        with open('admin.log', 'r') as f:
+            for line in (f.readlines() [-5:]):
+                logs += f'{line}'
+        await ctx.send(f'```css\n{logs}```')
     
     @commands.Cog.listener()
     async def on_message(self, message):
