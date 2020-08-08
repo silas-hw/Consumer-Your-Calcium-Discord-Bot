@@ -45,11 +45,15 @@ class Admin(commands.Cog):
         self.mutedinst.mute(ctx.message.guild.id, member.id)
         await ctx.send(f"<:mute:727914643879886929> {member} is now muted")
 
+        logging.info(f"{ctx.message.author} muted {member}")
+
     @commands.command()
     @commands.has_role('Admin')
     async def unmute(self, ctx, member: discord.Member):
         self.mutedinst.unmute(ctx.message.guild.id, member.id)
         await ctx.send(f"<:speaker:727914839615471687> {member} is no longer muted")
+
+        logging.info(f"{ctx.message.author} unmuted {member}")
         
     @commands.command()
     @commands.has_role('Admin')
