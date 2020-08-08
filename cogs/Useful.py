@@ -21,29 +21,6 @@ class Useful(commands.Cog):
     async def reminder(self, ctx, users, waitTime, *, message="reminder"):
         
         try:
-            #if in 24 hour time format
-            #if re.search(r"\d\d:\d\d", timeStr): #checks formatting of time given
-                
-                #givenHourStr, givenMinuteStr = timeStr.split(":") #the numbers seperated by the : are assigned to two variables
-                
-                #sets the hour and minute of when the command was sent
-                #tz = pytz.timezone('Europe/London') #sets timezone to be used to get current hour and minute
-                #currentHour = datetime.now(tz).hour
-                #currentMinute = datetime.now(tz).minute
-
-                #calculates the amount time that needs to pass in seconds
-                #hour, minute = int(givenHourStr) - currentHour, int(givenMinuteStr) - currentMinute
-                #time = hour*60**2 + minute*60
-
-                #await ctx.send(f"<:bell:727914124230787104> Reminder set for {timeStr} with message '{message}'")
-
-            #if time is given in minutes
-            #else:
-
-                #calculates amount of time that needs to pass in seconds
-                #time = int(timeStr)*60
-                #await ctx.send(f"<:bell:727914124230787104> Reminder set for {timeStr} minutes with message '{message}'")
-
             #allow user to chose time type and use minutes as a default
             timeType = "minute(s)"
             time = 0
