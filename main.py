@@ -20,7 +20,7 @@ def get_prefix(client, message):
 
     try:
         return prefixes[str(message.guild.id)]
-    except KeyError:
+    except AttributeError:
         return '!'
 
 client = commands.Bot(command_prefix = get_prefix)
