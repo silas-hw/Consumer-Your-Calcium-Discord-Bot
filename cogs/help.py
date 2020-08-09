@@ -30,14 +30,16 @@ class Help(commands.Cog):
 
             try:
                 #get the description and usage attributes from the object related to the command name
-                description = self.client.get_command(command).description
-                example = self.client.get_command(command).usage
+                cmd = self.client.get_command(command)
+                description = cmd.description
+                example = cmd.usage
+                guild_only = ([check for check in cmd.checks if 'guild_only' in str(check)] != []) #check if command is guild only
 
                 if description == '':
                     description = 'No description available'
 
                 helpMessage = discord.Embed(title="Calcium Consumer Help")
-                helpMessage.add_field(name=command, value=f"{description}\n\n`{example}`")
+                helpMessage.add_field(name=command, value=f"{description}\n\nServer exclusive: {guild_only}\n`{example}`")
 
                 await ctx.send(embed=helpMessage)
 
