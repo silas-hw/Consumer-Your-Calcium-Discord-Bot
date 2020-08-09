@@ -18,7 +18,10 @@ def get_prefix(client, message):
     with open("prefixes.json", "r") as f:
         prefixes = json.load(f)
 
-    return prefixes[str(message.guild.id)]
+    try:
+        return prefixes[str(message.guild.id)]
+    except KeyError:
+        return '!'
 
 client = commands.Bot(command_prefix = get_prefix)
 client.remove_command('help')
