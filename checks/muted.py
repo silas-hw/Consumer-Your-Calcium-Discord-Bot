@@ -9,9 +9,10 @@ class Muted():
             muted = json.load(f)
 
         def predicate(ctx):
-            if isinstance(ctx.channel, discord.channel.DMChannel):
+            try:
+                return ctx.message.author.id not in muted[str(ctx.guild.id)]
+            except AttributeError:
                 return True
-            return ctx.message.author.id not in muted[str(ctx.guild.id)]
         return commands.check(predicate)
 
     @staticmethod
