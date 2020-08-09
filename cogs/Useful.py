@@ -17,6 +17,7 @@ class Useful(commands.Cog):
 
     #mentions a role or member after a given amount of time has passed
     @commands.command(brief="Reminds members or roles", description="mentions role/user after given time has passed\nWhen using 24 hr time it is only possible to set a reminder within the same day,\n a possible way of getting around this is setting a reminder in minutes", usage=r"//reminder @CleanlyWolf#5407 14:00 reeeeeee")
+    @commands.guild_only()
     @Muted.check()
     async def reminder(self, ctx, users, waitTime, *, message="reminder"):
         

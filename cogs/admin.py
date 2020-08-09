@@ -50,6 +50,7 @@ class Admin(commands.Cog):
             json.dump(mutedinst.members, f, indent=4)
 
     @commands.command(brief="mutes a member", description="any message sent by a muted member will be deleted", usage=r"//mute @CleanlyWolf#5407")
+    @commands.guild_only()
     @commands.has_role('Admin')
     async def mute(self, ctx, member: discord.Member):
         self.mutedinst.mute(ctx.message.guild.id, member.id)
@@ -58,6 +59,7 @@ class Admin(commands.Cog):
         adminLog.info(f"{ctx.message.author} muted {member}")
 
     @commands.command()
+    @commands.guild_only()
     @commands.has_role('Admin')
     async def unmute(self, ctx, member: discord.Member):
         self.mutedinst.unmute(ctx.message.guild.id, member.id)
@@ -66,6 +68,7 @@ class Admin(commands.Cog):
         adminLog.info(f"{ctx.message.author} unmuted {member}")
         
     @commands.command()
+    @commands.guild_only()
     @commands.has_role('Admin')
     async def muted(self, ctx):
         message = "```Muted members:\n"
@@ -75,6 +78,7 @@ class Admin(commands.Cog):
         await ctx.send(message)
 
     @commands.command(aliases=['audit', 'adminlog', 'alogs', 'alog'])
+    @commands.guild_only()
     @commands.has_role('Admin')
     async def adminlogs(self, ctx):
         logs=''

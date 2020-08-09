@@ -18,6 +18,7 @@ class Misc(commands.Cog):
 
     #allows a user to set them self as afk
     @commands.command(brief="Set yourself as afk", description="set yourself as afk so if others mention you they are told", usage=r"//afk haha brrrr")
+    @commands.guild_only()
     @Muted.check()
     async def afk(self, ctx, *, userMessage=" "):
 
@@ -45,6 +46,7 @@ class Misc(commands.Cog):
     
     #gives information of given user
     @commands.command(aliases=["info", "i"], brief="get details of any member", description="get the nickname, date joined, top role and current status of any member", usage=r"//info @CleanlyWolf#5407")
+    @commands.guild_only()
     @Muted.check()
     async def information(self, ctx, member: discord.Member):
         
@@ -81,6 +83,7 @@ class Misc(commands.Cog):
 
     #gives them the role mentioned for announcements
     @commands.command(aliases=['ping'], brief="get pinged for announcements", description="give you the *consumer* role, which is pinged for announcements and updates")
+    @commands.guild_only()
     @Muted.check()
     async def pingme(self, ctx):
 
@@ -90,6 +93,7 @@ class Misc(commands.Cog):
 
     #react to the message before the command with a given set of emojis
     @commands.command(aliases=['r'], brief="reacts to messages", description="Reacts to the previous message sent\nThe message used to invoke the command is deleted", usage=r"//react epic")
+    @commands.guild_only()
     @Muted.check()
     async def react(self, ctx, reaction='epic'):
 

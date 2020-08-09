@@ -14,6 +14,7 @@ class Games(commands.Cog):
         self.client = client
 
     @commands.command(aliases=['ttt'], brief="Tic tac toe", description="Play a game of tic tac toe", usage=r"//ttt <player2>")
+    @commands.guild_only()
     @Muted.check()
     async def tic_tac_toe(self, ctx, player2: discord.Member):
 
