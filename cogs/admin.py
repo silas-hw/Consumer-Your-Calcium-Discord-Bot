@@ -49,7 +49,7 @@ class Admin(commands.Cog):
         with open('muted_members.json', 'r') as f:
             json.dump(mutedinst.members, f, indent=4)
 
-    @commands.command(brief="mutes a member", description="any message sent by a muted member will be deleted", usage=r"//mute <mute>)
+    @commands.command(brief="mutes a member", description="any message sent by a muted member will be deleted", usage=r"//mute <mute>")
     @commands.guild_only()
     @commands.has_role('Admin')
     async def mute(self, ctx, member: discord.Member):
