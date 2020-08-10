@@ -16,7 +16,7 @@ class Useful(commands.Cog):
         self.client = client
 
     #mentions a role or member after a given amount of time has passed
-    @commands.command(brief="Reminds members or roles", description="mentions role/user after given time has passed\nWhen using 24 hr time it is only possible to set a reminder within the same day,\n a possible way of getting around this is setting a reminder in minutes", usage=r"//reminder @CleanlyWolf#5407 14:00 reeeeeee")
+    @commands.command(brief="Reminds members or roles", description="mentions role/user after given time has passed\nWhen using 24 hr time it is only possible to set a reminder within the same day,\n a possible way of getting around this is setting a reminder in minutes", usage=r"//reminder <user/role> <time> reeeeeee")
     @commands.guild_only()
     @Muted.check()
     async def reminder(self, ctx, users, waitTime, *, message="reminder"):
@@ -49,7 +49,7 @@ class Useful(commands.Cog):
             
             await ctx.send("Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!")
 
-    @commands.command(brief="set a reminder for yourself", description="Recieve a dm reminding you to do something after a given period of time", usage=r"//remindme <time> <message>")
+    @commands.command(brief="set a reminder for yourself", description="Receive a dm reminding you to do something after a given period of time", usage=r"//remindme <time> <message>")
     @Muted.check()
     async def remindme(self, ctx, waitTime, message):
         timeType = "minute(s)"

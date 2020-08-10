@@ -11,7 +11,7 @@ class Help(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
+    @commands.command(brief="Display infomation on any command", description="Give a detailed explanation of any command alongside how to use it", usage=r"//help <command>")
     @Muted.check()
     async def help(self, ctx, command=None):
 

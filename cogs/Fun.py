@@ -30,12 +30,12 @@ class Fun(commands.Cog):
         except:
             await ctx.send("Invalid morse character or incorrect formatting - for more info type `//help decrypt`")
 
-    @commands.command(brief="Flip a coin", description="Flip a coin with a random outcome of either heads or tails")
+    @commands.command(brief="Flip a coin", description="Flip a coin with a random outcome of either heads or tails", usage=r"//flip")
     @Muted.check()
     async def flip(self, ctx):
         await ctx.send(f"{ctx.message.author.mention} {random.choice(['heads', 'tails'])}")
 
-    @commands.command(brief="Roll a dice", description="Roll a dice with any number of sides")
+    @commands.command(brief="Roll a dice", description="Roll a dice with any number of sides", usage=r"//roll <dice type>")
     @Muted.check()
     async def roll(self, ctx, type="d6"):
         try:
@@ -44,7 +44,7 @@ class Fun(commands.Cog):
         except ValueError:
             await ctx.send("Invalid dice type. To give a type use d[number of sides] *(e.g d8)*")
 
-    @commands.command()
+    @commands.command(brief="Play slots", description="Play a game of slots with emojis", usage=r"//slots")
     @Muted.check()
     async def slots(self, ctx):
         emojis = ['<:max:719639562678173769>', '<:max:719639562678173769>', '<:max:719639562678173769>', '<:max:719639562678173769>',

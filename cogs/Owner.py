@@ -8,7 +8,7 @@ class Owner(commands.Cog):
         self.client = client
 
     #used to reload cogs
-    @commands.command()
+    @commands.command(brief="Reloads a cog", descritpion="Reloads a cog so the main file doesn't need to be re-run")
     @commands.is_owner()
     async def reload(self, ctx, extension):
         self.client.unload_extension(f"cogs.{extension}")
@@ -17,7 +17,7 @@ class Owner(commands.Cog):
         logging.info(f"{extension} reloaded by {ctx.message.author}")
 
     #used to load cogs
-    @commands.command()
+    @commands.command(brief="Loads a cog", descritpion="Loads a cog so the main file doesn't need to be re-run")
     @commands.is_owner()
     async def load(self, ctx, extension):
         self.client.load_extension(f"cogs.{extension}")
@@ -25,7 +25,7 @@ class Owner(commands.Cog):
         logging.info(f"{extension} loaded by {ctx.message.author}")
 
     #returns logs
-    @commands.command()
+    @commands.command(brief="Displays logs", description="Displays the last 5 lines of logs")
     @commands.is_owner()
     async def logs(self, ctx):
         logs=''

@@ -17,7 +17,7 @@ class Misc(commands.Cog):
         self.afkUsers = {}
 
     #allows a user to set them self as afk
-    @commands.command(brief="Set yourself as afk", description="set yourself as afk so if others mention you they are told", usage=r"//afk haha brrrr")
+    @commands.command(brief="Set yourself as afk", description="set yourself as afk so if others mention you they are told", usage=r"//afk <message>")
     @commands.guild_only()
     @Muted.check()
     async def afk(self, ctx, *, userMessage=" "):
@@ -82,7 +82,7 @@ class Misc(commands.Cog):
         await ctx.send(embed=embed)
 
     #gives them the role mentioned for announcements
-    @commands.command(aliases=['ping'], brief="get pinged for announcements", description="give you the *consumer* role, which is pinged for announcements and updates")
+    @commands.command(aliases=['ping'], brief="get pinged for announcements", description="give you the *consumer* role, which is pinged for announcements and updates", usage=r"//pingme")
     @commands.guild_only()
     @Muted.check()
     async def pingme(self, ctx):
