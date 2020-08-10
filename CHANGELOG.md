@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased  
 
+## [0.8.1](https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/tree/v0.8.1) 2020-10-08  
+
+### Changed  
+
+>* Some commands have been made server exclusive  
+>* The bot has been made more versatile in where it can be used  
+>* The mute command works better  
+
 ## [0.8](https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/tree/v0.8) 2020-08-08  
 
 ### Added  
@@ -11,7 +19,7 @@ All notable changes to this project will be documented in this file.
 >* New owner commands  
 >* New admin commands  
 >* Admin logs  
->* New remindme command to set reminders to be sent to yourself in dm's  
+>* New remindme command to set reminders to be sent to yourself in dms  
 
 ### Changed  
 
@@ -60,4 +68,4 @@ All notable changes to this project will be documented in this file.
 
 ### Added  
 
->* Changelog to mark noteable changes  
+>* Changelog to mark notable changes  
