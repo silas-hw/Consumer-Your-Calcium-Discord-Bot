@@ -58,7 +58,7 @@ class Admin(commands.Cog):
 
         adminLog.info(f"{ctx.message.author} muted {member}")
 
-    @commands.command(brief="Unmutes a member", description="Unmutes a member so they can speak and use commands again", usage="//unmute <member>")
+    @commands.command(brief="Unmutes a member", description="Unmutes a member so they can speak and use commands again", usage=r"//unmute <member>")
     @commands.guild_only()
     @commands.has_role('Admin')
     async def unmute(self, ctx, member: discord.Member):
@@ -67,7 +67,7 @@ class Admin(commands.Cog):
 
         adminLog.info(f"{ctx.message.author} unmuted {member}")
         
-    @commands.command(brief="Show who's muted", descrption="Display a list of currently muted members", usage="//muted")
+    @commands.command(brief="Show who's muted", descrption="Display a list of currently muted members", usage=r"//muted")
     @commands.guild_only()
     @commands.has_role('Admin')
     async def muted(self, ctx):
@@ -77,7 +77,7 @@ class Admin(commands.Cog):
         message += "```"
         await ctx.send(message)
 
-    @commands.command(aliases=['audit', 'adminlog', 'alogs', 'alog'], brief="Show a log of admin commands used", description="Displays the last 5 lines of the admin logs, displaying when an admin command was used and who used it")
+    @commands.command(aliases=['audit', 'adminlog', 'alogs', 'alog'], brief="Show a log of admin commands used", description="Displays the last 5 lines of the admin logs, displaying when an admin command was used and who used it", usage=r"//alog")
     @commands.guild_only()
     @commands.has_role('Admin')
     async def adminlogs(self, ctx):
