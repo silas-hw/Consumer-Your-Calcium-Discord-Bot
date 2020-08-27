@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased  
 
+### Added  
+
+>* Typeracer related commands  
+>>1. `//typeracer set`  
+>>2. `//typeracer wpm`  
+>>3. `//typeracer leaderboard`  
+
 ## [0.8.1](https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/tree/v0.8.1) 2020-10-08  
 
 ### Changed  
