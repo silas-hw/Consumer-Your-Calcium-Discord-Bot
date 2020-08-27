@@ -29,12 +29,15 @@ class Typeracer(commands.Cog):
 
     @typeracer.command(brief="Check your typeracer wpm", description="Gets your average wpm from your typeracer account")
     async def wpm(self, ctx):
-        username = self.users[str(ctx.message.author.id)]
-        
-        userData = self.get_userData(username)
-        wpm = userData['tstats']['wpm']
-        
-        await ctx.send(f"{ctx.message.author.mention}: {int(wpm)}")
+        try:
+            username = self.users[str(ctx.message.author.id)]
+            
+            userData = self.get_userData(username)
+            wpm = userData['tstats']['wpm']
+            
+            await ctx.send(f"{ctx.message.author.mention}: {int(wpm)}")
+        except KeyError:
+            await ctx.send("⚠️ You're discord account does not have a typeracer username linked to it. To do so user `//typeracer set`")
 
     @typeracer.command(name="set", brief="Set your typeracer username", description="Set your typeracer username to be tied to your discord account, if the username is already being used you cannot use it", usage=r"//typeracer set <username>")
     async def setUsername(self, ctx, username):
@@ -61,9 +64,7 @@ class Typeracer(commands.Cog):
 
         users_list.sort(key=lambda x: x[1], reverse=True)
 
-        msg = discord.Embed(
-            title="Typeracer Leaderboard"
-        )
+        msg = discord.Embed(title="Typeracer Leaderboard")
         for index, user in enumerate(users_list):
             wpm = int(user[1])
             name = user[0]
