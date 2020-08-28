@@ -3,3 +3,4 @@ asyncio
 pytz
 mysql-connector
 morsepy
+requests
