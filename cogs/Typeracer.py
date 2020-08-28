@@ -44,10 +44,10 @@ class Typeracer(commands.Cog):
     async def setUsername(self, ctx, username):
 
         #allow a new file to be created if one doesn't already exist
-        if os.path.isfile(".\\data\\typeracer\\users.json"):
+        try:
             with open(".\\data\\typeracer\\users.json", "r") as f:
                 users = json.load(f)
-        else:
+        except FileNotFoundError:
             users = {}
         
         #ensure a username can only be used by one person
