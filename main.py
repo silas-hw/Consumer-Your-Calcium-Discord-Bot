@@ -11,7 +11,7 @@ logging.info('New main run\n\n')
 #set token
 with open('tokens.json', 'r') as tokenfile:
     tokens = json.load(tokenfile)
-    TOKEN = tokens['main']
+    TOKEN = tokens['test']
 
 #custom prefixes
 def get_prefix(client, message):

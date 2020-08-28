@@ -15,7 +15,7 @@ class Typeracer(commands.Cog):
         try:
             with open(".\\data\\typeracer\\users.json", "r") as f:
                 users = json.load(f)
-        except FileNotFoundError:
+        except Exception:
             users = {}
         return users
 
