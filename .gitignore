@@ -6,3 +6,4 @@ sqlpasswords.json
 __pycache__
 .vscode
 users.json
+data\typeracer\user.json
