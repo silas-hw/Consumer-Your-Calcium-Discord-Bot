@@ -53,7 +53,7 @@ class Typeracer(commands.Cog):
             users[str(ctx.message.author.id)] = username
             print(users)
             with open(".\\data\\typeracer\\users.json", "w") as f:
-                json.dump(self.users, f, indent=4)
+                json.dump(users, f, indent=4)
             await ctx.send(f"Username now set to {username}")
         else:
             await ctx.send("That username is already being used")
