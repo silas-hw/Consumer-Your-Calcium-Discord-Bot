@@ -21,7 +21,7 @@ class Typeracer(commands.Cog):
         
         return dataDict
 
-    @commands.group(brief="Group of commands used for typeracer stats", description="Used to check your typeracer stats against other server members", usage=r"//typeracer set, //typeracer wpm, //typeracer leaderboard")
+    @commands.group(aliases=["type", "tracer"], brief="Group of commands used for typeracer stats", description="Used to check your typeracer stats against other server members", usage=r"//typeracer set, //typeracer wpm, //typeracer leaderboard")
     async def typeracer(self, ctx):
         users = self.users
         get_userData = self.get_userData
@@ -41,14 +41,25 @@ class Typeracer(commands.Cog):
 
     @typeracer.command(name="set", brief="Set your typeracer username", description="Set your typeracer username to be tied to your discord account, if the username is already being used you cannot use it", usage=r"//typeracer set <username>")
     async def setUsername(self, ctx, username):
-        with open(".\\data\\typeracer\\users.json", "r") as f:
-            users = json.load(f)
-        users[str(ctx.message.author.id)] = username
-        with open(".\\data\\typeracer\\users.json", "w") as f:
-            json.dump(users, f, indent=4)
+
+        #allow a new file to be created if one doesn't already exist
+        try:
+            with open(".\\data\\typeracer\\users.json", "r") as f:
+                users = json.load(f)
+        except FileNotFoundError:
+            users = {}
+        
+        #ensure a username can only be used by one person
+        if username not in users.values():
+            users[str(ctx.message.author.id)] = username
+            with open(".\\data\\typeracer\\users.json", "w") as f:
+                json.dump(users, f, indent=4)
+            await ctx.send(f"Username now set to {username}")
+        else:
+            await ctx.send("That username is already being used")
 
     @commands.guild_only()
-    @typeracer.command(brief="Display a typeracer leaderboard", description="Displays a leaderboard of all members who have tied a typeracer username to their account")
+    @typeracer.command(aliases=["leader"], brief="Display a typeracer leaderboard", description="Displays a leaderboard of all members who have tied a typeracer username to their account")
     async def leaderboard(self, ctx):
         users_list = []
         for user in self.users:
