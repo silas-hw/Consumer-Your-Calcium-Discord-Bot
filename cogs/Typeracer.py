@@ -1,5 +1,6 @@
 import json
 import requests
+import os
 
 import discord
 from discord.ext import commands, tasks
@@ -43,10 +44,10 @@ class Typeracer(commands.Cog):
     async def setUsername(self, ctx, username):
 
         #allow a new file to be created if one doesn't already exist
-        try:
+        if os.path.isfile(".\\data\\typeracer\\users.json"):
             with open(".\\data\\typeracer\\users.json", "r") as f:
                 users = json.load(f)
-        except Exception:
+        else:
             users = {}
         
         #ensure a username can only be used by one person
