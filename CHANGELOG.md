@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased  
 
-## [0.9.1](https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/tree/v0.9) 2020-28-08  
+## [0.9.1](https://github.com/silas-hw/Consumer-Your-Calcium-Discord-Bot/tree/v0.9.1) 2020-28-08  
 
 *Patch*
 
