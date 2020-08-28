@@ -50,6 +50,7 @@ class Typeracer(commands.Cog):
         #ensure a username can only be used by one person
         if username not in self.users.values():
             self.users[str(ctx.message.author.id)] = username
+            print(self.users)
             with open(".\\data\\typeracer\\users.json", "w") as f:
                 json.dump(self.users, f, indent=4)
             await ctx.send(f"Username now set to {username}")
